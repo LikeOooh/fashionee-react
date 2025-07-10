@@ -1,0 +1,22 @@
+.menu-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+
+  &.active span, &:hover span {
+    color: #FF8E8E;
+  }
+
+  &:hover .icon_default {
+    display: none;
+  }
+
+  &:hover .icon_hover {
+    display: inline-block;
+  }
+}
+

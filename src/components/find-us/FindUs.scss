@@ -1,0 +1,25 @@
+.find-us {
+  &__text {
+    margin: 0 0 20px 0;
+  }
+
+  &__links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  &__link a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+    color: rgba(68, 68, 68, 1);
+  }
+
+  &__line {
+    border-bottom: 1px solid #444444;
+    height: 1px;
+    width: 10px;
+  }
+}

@@ -1,0 +1,48 @@
+.header {
+  max-width: 1860px;
+  margin: 50px auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+
+  &__left-side {
+    display: flex;
+    gap: 65px;
+    align-items: center;
+    position: relative;
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  &__right-side {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__icon-counter {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__counter {
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    padding: 1px 4px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+
+    & span {
+      display: inline-block;
+      margin-left: 2px;
+      margin-right: 2px;
+      color: white;
+    }
+  }
+}
