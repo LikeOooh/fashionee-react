@@ -65,6 +65,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
+    cursor: pointer;
 
     &-vertical-line {
       height: 15px;
@@ -72,7 +73,7 @@
       background-color: rgba(0, 0, 0, 1);
     }
 
-    &-active {
+    &.active {
       color: rgba(255, 142, 142, 1);
     }
   }

@@ -19,7 +19,7 @@ export function Header({page, setPage}) {
                 </div>
             </div>
             <div className="header__right-side">
-                <Icon name="search" className="icon_medium"/>
+                <Icon name="search" className="icon_search"/>
                 <Icon name="user" className="icon_medium"/>
                 <div className="header__icon-counter">
                     <Icon name="heart" className="icon_medium"/>

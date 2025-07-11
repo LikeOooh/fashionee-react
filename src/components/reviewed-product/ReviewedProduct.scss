@@ -1,0 +1,48 @@
+.reviewed-product {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  &__image img {
+    width: 75px;
+    height: 85px;
+    background-color: rgba(241, 242, 243, 1);
+  }
+
+  &__info {
+    max-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgba(68, 68, 68, 1);
+  }
+
+  &__price {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__current-price {
+    font-family: "Josefin Sans", serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    color: rgba(0, 0, 0, 1);
+  }
+
+  &__old-price {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 12px;
+    font-family: "Josefin Sans", serif;
+    text-decoration: line-through;
+  }
+
+}

@@ -1,8 +1,7 @@
 import './ContentBlock.scss';
-import {Showcase} from "../showcase/Showcase.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function ContentBlock({page}) {
+export function ContentBlock({page, pages, setPage}) {
     return (
         <div className="content-block">
             <div className="content-block__site-description">
@@ -12,8 +11,7 @@ export function ContentBlock({page}) {
                     <div className="content-block__breadcrumbs">
                         <ul className="content-block__crumb-list">
                             <li className="content-block__crumb-vertical-line"></li>
-                            <li className="content-block__crumb">Home</li>
-                            <li className="content-block__crumb-active">{page}</li>
+                            {pages?.map((item) => (<li key={item} className={item === page ? "content-block__crumb active" : "content-block__crumb"} onClick={() => setPage(item)}>{item}</li>))}
                         </ul>
                     </div>
                     <div className="content-block__horizontal-line"></div>

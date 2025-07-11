@@ -8,7 +8,7 @@ export function Product({product}) {
                 <div className="product__top-bar">
                     <div className="product__labels">
                         {product?.isSale && <div className="product__label sale">Sale</div>}
-                        {product?.isNew && <div className="product__label new hidden">New</div>}
+                        {product?.isNew && <div className="product__label new">New</div>}
                     </div>
                     <div>
                         <Icon name="heart" />

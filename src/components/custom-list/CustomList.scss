@@ -14,6 +14,13 @@
     font-weight: 400;
     line-height: 27px;
 
+    & a {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 27px;
+    }
+
     &::before {
       content: "";
       display: block;
@@ -34,5 +41,19 @@
         background-image: url("../../icons/small-row.svg");
       }
     }
+
+    &.sidebar {
+      font-size: 16px;
+    }
+  }
+
+  &.sidebar  {
+    margin: 0 0 0 20px;
+  }
+
+  &.sidebar .custom-list__item::before {
+    width: 5px;
+    height: 5px;
+
   }
 }
