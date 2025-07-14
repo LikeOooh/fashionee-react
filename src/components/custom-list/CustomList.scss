@@ -42,16 +42,16 @@
       }
     }
 
-    &.sidebar {
+    &.sidebar-list {
       font-size: 16px;
     }
   }
 
-  &.sidebar  {
+  &.sidebar-list  {
     margin: 0 0 0 20px;
   }
 
-  &.sidebar .custom-list__item::before {
+  &.sidebar-list .custom-list__item::before {
     width: 5px;
     height: 5px;
 

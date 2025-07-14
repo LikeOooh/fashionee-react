@@ -4,7 +4,7 @@ import {products} from '../../../data/products.json'
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Showcase() {
+export function Showcase({chosenProducts, changeChosenProducts}) {
     const productCount = products?.length;
 
     return (
@@ -25,7 +25,7 @@ export function Showcase() {
                         </div>
                     </div>
                     <div className="showcase__products">
-                        {products.map((product) => (<Product key={product?.id} product={product}/>))}
+                        {products.map((product) => (<Product key={product?.id} product={product} isChosen={chosenProducts.includes(product?.id)} changeChosenProducts={changeChosenProducts}/>))}
                     </div>
                     <div className="showcase__pagination">
                         <div>

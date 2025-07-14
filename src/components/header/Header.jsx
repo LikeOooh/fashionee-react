@@ -4,7 +4,7 @@ import {Logo} from "../logo/Logo.jsx";
 import {Icon} from "../icon/Icon.jsx";
 import {Burger} from "../burger/Burger.jsx";
 
-export function Header({page, setPage}) {
+export function Header({page, setPage, chosenProducts}) {
     return (
         <header className="header">
             <div className="header__left-side">
@@ -23,7 +23,7 @@ export function Header({page, setPage}) {
                 <Icon name="user" className="icon_medium"/>
                 <div className="header__icon-counter">
                     <Icon name="heart" className="icon_medium"/>
-                    <span className="header__counter"><span>10</span></span>
+                    <div className="header__counter"><span>{chosenProducts?.length}</span></div>
                 </div>
                 <div className="header__icon-counter" onClick={() => setPage("Cart")}>
                     <Icon name="cart" className="icon_medium"/>

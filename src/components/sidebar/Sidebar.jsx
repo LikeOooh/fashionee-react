@@ -2,13 +2,13 @@ import './Sidebar.scss'
 import {Icon} from "../icon/Icon.jsx";
 import {CustomList} from "../custom-list/CustomList.jsx";
 import {SelectItem} from "../select-item/SelectItem.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
 
 export function Sidebar() {
     const categories = ['All', 'Men', 'Women', 'Accessories', 'New Arrivals'];
     const colors = ['Black', 'Blue', 'Red', 'Yellow', 'Green'];
-    const [isChecked, setIsChecked] = useState(false);
+    const [selectedColors, setSelectedColors] = useState([]);
     const reviewedProducts = [
         {
             "id": 18,
@@ -52,6 +52,16 @@ export function Sidebar() {
         },
     ]
 
+    useEffect(() => {
+    }, [selectedColors]);
+
+    const changeSelection = (value) => {
+        const newSelectedColors = selectedColors.includes(value)
+            ? selectedColors.filter(item => item !== value)
+            : [...selectedColors, value];
+        setSelectedColors(newSelectedColors);
+    }
+
     return (
         <div className="sidebar">
             <div className="sidebar__search">
@@ -62,7 +72,7 @@ export function Sidebar() {
             </div>
             <div className="sidebar__item">
                 <div className="h4">Categories</div>
-                <CustomList custList={categories} className="sidebar"/>
+                <CustomList custList={categories} className="sidebar-list"/>
             </div>
             <div className="sidebar__item">
                 <div className="h4">Price</div>
@@ -74,7 +84,7 @@ export function Sidebar() {
             <div className="sidebar__item">
                 <div className="h4">Colors</div>
                 <div className="sidebar__colors">
-                    {colors?.map((item) => (<SelectItem key={item} value={item} isChecked={isChecked} onClick={() => setIsChecked(!isChecked)}/>))}
+                    {colors?.map((item) => (<SelectItem key={item} value={item} isChecked={selectedColors.includes(item)} changeSelection={changeSelection}/>))}
                 </div>
             </div>
             <div className="sidebar__item">
