@@ -5,42 +5,44 @@ import {Footer} from "./components/footer/Footer.jsx";
 import {Showcase} from "./components/showcase/Showcase.jsx";
 import {Cart} from "./components/cart/Cart.jsx";
 import {products} from '/data/products.json'
+import AuthContext from "./context/AuthContext.jsx";
 
 export function App() {
+    const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")) || false);
     const [page, setPage] = useState("Shop");
-    const [chosenProducts, setChosenProducts] = useState([]);
-    const [orderedProducts, setOrderedProducts] = useState([]);
+    const [chosenProducts, setChosenProducts] = useState(JSON.parse(localStorage.getItem("chosenProducts")) || []);
+    const [orderedProducts, setOrderedProducts] = useState(JSON.parse(localStorage.getItem("orderedProducts")) || []);
     const pages = ['Cart', 'Shop'];
-    const savedChosen = localStorage.getItem("chosenProducts");
-    const savedOrdered = localStorage.getItem("orderedProducts");
-    //localStorage.removeItem("orderedProducts");
-    useEffect(() => {
-        if (savedChosen) {
-            setChosenProducts(JSON.parse(savedChosen));
-        }
-        if (savedOrdered) {
-            setOrderedProducts(JSON.parse(savedOrdered));
-        }
-    }, [savedChosen, savedOrdered]);
+
 
     useEffect(() => {
         console.log(page);
     }, [page]);
 
+    useEffect(() => {
+        console.log(auth);
+        localStorage.setItem("auth", JSON.stringify(auth));
+    }, [auth]);
+
     return (
         <>
-            <Header page={page} setPage={setPage} chosenProducts={chosenProducts} orderedProducts={orderedProducts}/>
-            <ContentBlock page={page} pages={pages} setPage={setPage}/>
-            {page === "Shop" && <Showcase products={products}
-                                          chosenProducts={chosenProducts}
-                                          changeChosenProducts={changeChosenProducts}
-                                          orderedProducts={orderedProducts}
+            <AuthContext value={{
+                auth,
+                setAuth,
+                page,
+                setPage,
+                chosenProducts,
+                orderedProducts
+            }}>
+                < Header chosenProducts={chosenProducts}
+                         orderedProducts={orderedProducts}/>
+                <ContentBlock pages={pages}/>
+                {page === "Shop" && <Showcase products={products} changeChosenProducts={changeChosenProducts}
+                                              changeOrderedProducts={changeOrderedProducts}/>}
+                {page === "Cart" && <Cart products={products} changeChosenProducts={changeChosenProducts}
                                           changeOrderedProducts={changeOrderedProducts}/>}
-            {page === "Cart" && <Cart
-                products={products}
-                orderedProducts={orderedProducts}
-                changeOrderedProducts={changeOrderedProducts}/>}
-            <Footer/>
+                <Footer/>
+            </AuthContext>
         </>
     )
 

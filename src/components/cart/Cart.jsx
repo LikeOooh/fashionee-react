@@ -1,10 +1,13 @@
-import './Cart.scss'
+import './Cart.scss';
+import AuthContext from "../../context/AuthContext.jsx";
+import {useContext} from "react";
 import {FindUs} from "../find-us/FindUs.jsx";
 import {CartProduct} from "../cart-product/CartProduct.jsx";
 import {CartPriceRow} from "../cart-price-row/CartPriceRow.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Cart({orderedProducts, changeOrderedProducts}) {
+export function Cart({changeOrderedProducts}) {
+    const {orderedProducts} = useContext(AuthContext);
     const totalPrice = orderedProducts.length > 1 ? orderedProducts.reduce((acc, item) => acc + item.totalPrice, 0) : orderedProducts[0]?.totalPrice || 0;
     const deliveryValue = totalPrice !== 0 ? 16 : 0;
     const totalOrderPrice = (totalPrice + deliveryValue).toFixed(2);
@@ -15,7 +18,7 @@ export function Cart({orderedProducts, changeOrderedProducts}) {
                 <div className="cart__order-wrapper">
                     <div className="cart__product-list">
                         {orderedProducts?.map((item) => (
-                            <CartProduct key={item?.id} order={item} changeOrderedProducts={changeOrderedProducts}/>))}
+                            <CartProduct key={item?.product?.id} order={item} changeOrderedProducts={changeOrderedProducts}/>))}
                     </div>
                     <div className="cart__promo-code-wrapper">
                         <div className="cart__info">

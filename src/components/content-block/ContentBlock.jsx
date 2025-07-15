@@ -1,7 +1,11 @@
 import './ContentBlock.scss';
+import AuthContext from "../../context/AuthContext.jsx";
+import {useContext} from "react";
 import {Icon} from "../icon/Icon.jsx";
 
-export function ContentBlock({page, pages, setPage}) {
+export function ContentBlock({ pages}) {
+    const {page, setPage} = useContext(AuthContext);
+
     return (
         <div className="content-block">
             <div className="content-block__site-description">
