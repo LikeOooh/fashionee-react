@@ -4,54 +4,25 @@ import {CartProduct} from "../cart-product/CartProduct.jsx";
 import {CartPriceRow} from "../cart-price-row/CartPriceRow.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Cart() {
-    const cartProducts = [
-        {
-            "id": 4,
-            "name": "Fashionee - catton shirt",
-            "price": 110.99,
-            "oldPrice": null,
-            "isSale": false,
-            "isNew": false,
-            "categories": [
-                "Men"
-            ],
-            "color": "Brown",
-            "image": "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/911e17505fb10478ce04f078943bf74e.png/s/f1200x/a/534336/sc/55",
-            "count": 1,
-            "size": "S",
-        },
-        {
-            "id": 2,
-            "name": "Spray wrap skirt",
-            "price": 35.99,
-            "oldPrice": null,
-            "isSale": false,
-            "isNew": false,
-            "categories": [
-                "Women"
-            ],
-            "color": "Red",
-            "image": "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/061c4e0891851d157cbcf6984295b7ed.png/s/f1200x/a/534336/sc/111",
-            "count": 1,
-            "size": null,
-        },
-    ]
+export function Cart({orderedProducts, changeOrderedProducts}) {
+    const totalPrice = orderedProducts.length>1 ? orderedProducts.reduce((acc, item) => acc + item.totalPrice, 0) : orderedProducts[0]?.totalPrice || 0;
+    const deliveryValue = totalPrice !== 0 ? 16 : 0;
+    const totalOrderPrice = (totalPrice + deliveryValue).toFixed(2);
 
     return (
         <div className="container">
             <div className="cart">
                 <div className="cart__order-wrapper">
                     <div className="cart__product-list">
-                        {cartProducts?.map((item) => (<CartProduct key={item?.id} product={item}/>))}
+                        {orderedProducts?.map((item) => (<CartProduct key={item?.id} order={item} changeOrderedProducts={changeOrderedProducts}/>))}
                     </div>
                     <div className="cart__order">
                         <div className="cart__title">You Order</div>
                         <div className="cart__order-price-wrapper">
-                            <CartPriceRow type="price" rowName="Order price" value="146.98" info=""/>
+                            <CartPriceRow type="price" rowName="Order price" value={totalPrice}  info=""/>
                             <CartPriceRow type="promocode" rowName="Discount for promo code" value="No" info=""/>
-                            <CartPriceRow type="delivery" rowName="Delivery" value="16" info="(Aug 02 at 16:00)"/>
-                            <CartPriceRow type="total" rowName="Total" value="162.98" info=""/>
+                            {deliveryValue !== 0 && <CartPriceRow type="delivery" rowName="Delivery" value={deliveryValue} info="(Aug 02 at 16:00)"/>}
+                            <CartPriceRow type="total" rowName="Total" value={totalOrderPrice} info=""/>
                         </div>
                         <div className="button-wrapper cart__button-wrapper">
                             <button className="button cart__button">Checkout</button>

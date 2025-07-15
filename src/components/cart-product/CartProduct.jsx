@@ -1,7 +1,9 @@
 import './CartProduct.scss'
 
-export function CartProduct({product}) {
-    const totalPrice = product?.price * product?.count;
+export function CartProduct({order, changeOrderedProducts}) {
+    const product = order?.product;
+    const count = order?.count;
+    const totalPrice = (product?.price * order?.count).toFixed(2);
 
     return (
         <div className="cart-product">
@@ -17,9 +19,9 @@ export function CartProduct({product}) {
                             <div className="cart-product__current-price">${product?.price}</div>
                         </div>
                         <div className="cart-product__quantity">
-                            <div className="cart-product__count-button">-</div>
-                            <div className="count">{product?.count}</div>
-                            <div className="cart-product__count-button">+</div>
+                            <div className="cart-product__count-button" onClick={() => changeOrderedProducts(product, "decrease")}>-</div>
+                            <div className="count">{count}</div>
+                            <div className="cart-product__count-button" onClick={() => changeOrderedProducts(product, "increase")}>+</div>
                         </div>
                     </div>
                     <div className="cart-product__total-price">

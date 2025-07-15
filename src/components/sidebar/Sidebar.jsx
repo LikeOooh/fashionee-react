@@ -1,4 +1,4 @@
-import './Sidebar.scss'
+import './Sidebar.scss';
 import {Icon} from "../icon/Icon.jsx";
 import {CustomList} from "../custom-list/CustomList.jsx";
 import {SelectItem} from "../select-item/SelectItem.jsx";

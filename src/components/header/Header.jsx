@@ -4,7 +4,8 @@ import {Logo} from "../logo/Logo.jsx";
 import {Icon} from "../icon/Icon.jsx";
 import {Burger} from "../burger/Burger.jsx";
 
-export function Header({page, setPage, chosenProducts}) {
+export function Header({page, setPage, chosenProducts, orderedProducts}) {
+    const totalOrderedCount = orderedProducts.reduce((acc, item) => acc + item.count, 0);
     return (
         <header className="header">
             <div className="header__left-side">
@@ -27,7 +28,7 @@ export function Header({page, setPage, chosenProducts}) {
                 </div>
                 <div className="header__icon-counter" onClick={() => setPage("Cart")}>
                     <Icon name="cart" className="icon_medium"/>
-                    <div className="header__counter"><span>10</span></div>
+                    <div className="header__counter"><span>{totalOrderedCount}</span></div>
                 </div>
             </div>
         </header>

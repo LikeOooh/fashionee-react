@@ -1,10 +1,9 @@
 import './Showcase.scss';
 import {Product} from "../product/Product.jsx";
-import {products} from '../../../data/products.json'
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Showcase({chosenProducts, changeChosenProducts}) {
+export function Showcase({products, chosenProducts, changeChosenProducts, orderedProducts, changeOrderedProducts}) {
     const productCount = products?.length;
 
     return (
@@ -25,7 +24,13 @@ export function Showcase({chosenProducts, changeChosenProducts}) {
                         </div>
                     </div>
                     <div className="showcase__products">
-                        {products.map((product) => (<Product key={product?.id} product={product} isChosen={chosenProducts.includes(product?.id)} changeChosenProducts={changeChosenProducts}/>))}
+                        {products.map((product) => (<Product key={product?.id}
+                                                             product={product}
+                                                             chosenProducts={chosenProducts}
+                                                             orderedProducts={orderedProducts}
+                                                             changeChosenProducts={changeChosenProducts}
+                                                             changeOrderedProducts={changeOrderedProducts}
+                        />))}
                     </div>
                     <div className="showcase__pagination">
                         <div>
