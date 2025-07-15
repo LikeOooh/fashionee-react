@@ -3,11 +3,17 @@ import {MenuItem} from "../menu-item/MenuItem.jsx";
 import {Logo} from "../logo/Logo.jsx";
 import {Icon} from "../icon/Icon.jsx";
 import {Burger} from "../burger/Burger.jsx";
-import AuthContext from "../../context/AuthContext.jsx";
+import {AuthContext} from '../../hooks/AuthContext';
 import {useContext} from "react";
 
-export function Header({chosenProducts, orderedProducts}) {
-    const {auth, setAuth, page, setPage} = useContext(AuthContext);
+export function Header({page, setPage}) {
+    const {
+        isAuth,
+        setIsAuth,
+        chosenProducts,
+        orderedProducts
+    } =useContext(AuthContext);
+
     const totalOrderedCount = orderedProducts.reduce((acc, item) => acc + item.count, 0);
 
     return (
@@ -24,21 +30,22 @@ export function Header({chosenProducts, orderedProducts}) {
                 </div>
             </div>
             <div className="header__right-side">
-                {auth &&
-                    <>
-                        <Icon name="search" className="icon_search"/>
-                        <Icon name="user" className="icon_medium"/>
-                        <div className="header__icon-counter">
-                            <Icon name="heart" className="icon_medium"/>
-                            <div className="header__counter"><span>{chosenProducts?.length}</span></div>
-                        </div>
-                        <div className="header__icon-counter" onClick={() => setPage("Cart")}>
-                            <Icon name="cart" className="icon_medium"/>
-                            <div className="header__counter"><span>{totalOrderedCount}</span></div>
-                        </div>
-                    </>
-                }
-                <button onClick={() => setAuth(!auth)}>{auth ? "Выйти" : "Войти"}</button>
+                {isAuth && "Вы авторизованы"}
+                <button className="header__auth-button"
+                        onClick={() => setIsAuth(!isAuth)}>{isAuth ? "Выйти" : "Войти"}</button>
+                <>
+                    <Icon name="search" className="icon_search"/>
+                    <Icon name="user" className="icon_medium"/>
+                    <div className="header__icon-counter">
+                        <Icon name="heart" className="icon_medium"/>
+                        <div className="header__counter"><span>{chosenProducts?.length}</span></div>
+                    </div>
+                    <div className="header__icon-counter" onClick={() => setPage("Cart")}>
+                        <Icon name="cart" className="icon_medium"/>
+                        <div className="header__counter"><span>{totalOrderedCount}</span></div>
+                    </div>
+                </>
+
             </div>
         </header>
     )

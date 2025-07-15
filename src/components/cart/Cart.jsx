@@ -1,16 +1,16 @@
 import './Cart.scss';
-import AuthContext from "../../context/AuthContext.jsx";
-import {useContext} from "react";
+import {AuthContext} from '../../hooks/AuthContext';
 import {FindUs} from "../find-us/FindUs.jsx";
 import {CartProduct} from "../cart-product/CartProduct.jsx";
 import {CartPriceRow} from "../cart-price-row/CartPriceRow.jsx";
 import {Icon} from "../icon/Icon.jsx";
+import {useContext} from "react";
 
-export function Cart({changeOrderedProducts}) {
-    const {orderedProducts} = useContext(AuthContext);
+export function Cart() {
+    const {orderedProducts, changeOrderedProducts} = useContext(AuthContext);
     const totalPrice = orderedProducts.length > 1 ? orderedProducts.reduce((acc, item) => acc + item.totalPrice, 0) : orderedProducts[0]?.totalPrice || 0;
     const deliveryValue = totalPrice !== 0 ? 16 : 0;
-    const totalOrderPrice = (totalPrice + deliveryValue).toFixed(2);
+    const totalOrderPrice = totalPrice + deliveryValue;
 
     return (
         <div className="container">
@@ -18,7 +18,8 @@ export function Cart({changeOrderedProducts}) {
                 <div className="cart__order-wrapper">
                     <div className="cart__product-list">
                         {orderedProducts?.map((item) => (
-                            <CartProduct key={item?.product?.id} order={item} changeOrderedProducts={changeOrderedProducts}/>))}
+                            <CartProduct key={item?.product?.id} order={item}
+                                         changeOrderedProducts={changeOrderedProducts}/>))}
                     </div>
                     <div className="cart__promo-code-wrapper">
                         <div className="cart__info">
@@ -43,11 +44,11 @@ export function Cart({changeOrderedProducts}) {
                 <div className="cart__order">
                     <div className="cart__title">Your Order</div>
                     <div className="cart__order-price-wrapper">
-                        <CartPriceRow type="price" rowName="Order price" value={totalPrice} info=""/>
+                        <CartPriceRow type="price" rowName="Order price" value={totalPrice.toFixed(2)} info=""/>
                         <CartPriceRow type="promocode" rowName="Discount for promo code" value="No" info=""/>
                         {deliveryValue !== 0 && <CartPriceRow type="delivery" rowName="Delivery" value={deliveryValue}
                                                               info="(Aug 02 at 16:00)"/>}
-                        <CartPriceRow type="total" rowName="Total" value={totalOrderPrice} info=""/>
+                        <CartPriceRow type="total" rowName="Total" value={totalOrderPrice.toFixed(2)} info=""/>
                     </div>
                     <div className="button-wrapper cart__button-wrapper">
                         <button className="button cart__button">Checkout</button>

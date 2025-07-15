@@ -3,7 +3,7 @@ import {Product} from "../product/Product.jsx";
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Showcase({products, changeChosenProducts, changeOrderedProducts}) {
+export function Showcase({products}) {
     const productCount = products?.length;
 
     return (
@@ -24,11 +24,7 @@ export function Showcase({products, changeChosenProducts, changeOrderedProducts}
                         </div>
                     </div>
                     <div className="showcase__products">
-                        {products.map((product) => (<Product key={product?.id}
-                                                             product={product}
-                                                             changeChosenProducts={changeChosenProducts}
-                                                             changeOrderedProducts={changeOrderedProducts}
-                        />))}
+                        {products.map((product) => (<Product key={product?.id} product={product}/>))}
                     </div>
                     <div className="showcase__pagination">
                         <div>

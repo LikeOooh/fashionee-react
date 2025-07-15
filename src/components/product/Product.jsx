@@ -1,10 +1,10 @@
 import './Product.scss';
-import AuthContext from "../../context/AuthContext.jsx";
-import {useContext} from "react";
+import {AuthContext} from '../../hooks/AuthContext';
 import {Icon} from "../icon/Icon.jsx";
+import {useContext} from "react";
 
-export function Product({product, changeChosenProducts, changeOrderedProducts}) {
-    const {chosenProducts, orderedProducts} = useContext(AuthContext);
+export function Product({product}) {
+    const {chosenProducts, orderedProducts,changeChosenProducts,changeOrderedProducts} = useContext(AuthContext);
     const isChosen = chosenProducts.includes(product?.id);
     const orderedItem = orderedProducts.find(item => item.product?.id === product.id);
     const isOrdered = !!orderedItem;

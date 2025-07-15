@@ -23,6 +23,17 @@
     gap: 40px;
   }
 
+  &__auth-button {
+    background-color: rgba(248, 248, 251, 1);
+    height: 30px;
+    width: 80px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
   &__icon-counter {
     display: flex;
     align-items: center;
