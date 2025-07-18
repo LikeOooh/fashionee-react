@@ -4,6 +4,8 @@ import {CustomList} from "../custom-list/CustomList.jsx";
 import {SelectItem} from "../select-item/SelectItem.jsx";
 import {useEffect, useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
+import {useDebounce} from "../../hooks/useDebounce.jsx";
+
 
 export function Sidebar() {
     const categories = ['All', 'Men', 'Women', 'Accessories', 'New Arrivals'];
@@ -51,9 +53,17 @@ export function Sidebar() {
             "image": "https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/54cdbf69f8e60ba13e2e795cd495567f.png/s/f1200x/a/534336/sc/265"
         },
     ]
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
     useEffect(() => {
     }, [selectedColors]);
+
+    useEffect(() => {
+        if (debouncedSearchTerm) {
+            console.log('Ищем:', debouncedSearchTerm);
+        }
+    }, [debouncedSearchTerm]);
 
     const changeSelection = (value) => {
         const newSelectedColors = selectedColors.includes(value)
@@ -66,7 +76,8 @@ export function Sidebar() {
         <div className="sidebar">
             <div className="sidebar__search">
                 <label>
-                    <input type="text" placeholder="Search" className="input sidebar__search-row"/>
+                    <input type="text" placeholder="Search" className="input sidebar__search-row" value={searchTerm}
+                           onChange={(e) => setSearchTerm(e.target.value)}/>
                     <Icon name="search" className="icon_search sidebar__search-icon"/>
                 </label>
             </div>
@@ -84,7 +95,9 @@ export function Sidebar() {
             <div className="sidebar__item">
                 <div className="h4">Colors</div>
                 <div className="sidebar__colors">
-                    {colors?.map((item) => (<SelectItem key={item} value={item} isChecked={selectedColors.includes(item)} changeSelection={changeSelection}/>))}
+                    {colors?.map((item) => (
+                        <SelectItem key={item} value={item} isChecked={selectedColors.includes(item)}
+                                    changeSelection={changeSelection}/>))}
                 </div>
             </div>
             <div className="sidebar__item">
