@@ -1,15 +1,16 @@
+import data from '/data/products.json'
 import {Header} from "./components/header/Header.jsx";
 import {ContentBlock} from "./components/content-block/ContentBlock.jsx";
 import {Footer} from "./components/footer/Footer.jsx";
 import {Showcase} from "./components/showcase/Showcase.jsx";
 import {Cart} from "./components/cart/Cart.jsx";
-import {products} from '/data/products.json'
 import {AuthProvider} from './hooks/AuthProvider.jsx';
 import {useEffect, useState} from "react";
 
 export function App() {
     const pages = ['Cart', 'Shop'];
     const [page, setPage] = useState("Shop");
+    const products = data.products;
     //localStorage.clear();
 
     useEffect(() => {
@@ -20,8 +21,8 @@ export function App() {
         <AuthProvider>
             < Header page={page} setPage={setPage}/>
             <ContentBlock page={page} pages={pages} setPage={setPage}/>
-            {page === "Shop" && <Showcase products={products} />}
-            {page === "Cart" && <Cart />}
+            {page === "Shop" && <Showcase products={products}/>}
+            {page === "Cart" && <Cart/>}
             <Footer/>
         </AuthProvider>
     )

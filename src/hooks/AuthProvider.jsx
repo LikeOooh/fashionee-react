@@ -1,25 +1,26 @@
 import {useEffect, useState} from "react";
 import {AuthContext} from "./AuthContext.jsx";
+import {IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS} from "../constants/localStorage.js";
 
 export function AuthProvider({children}) {
     const [isAuth, setIsAuth] = useState(() => {
-        const saved = localStorage.getItem("isAuth");
+        const saved = localStorage.getItem(IS_AUTH);
         return saved ? JSON.parse(saved) : false;
     });
 
     const [chosenProducts, setChosenProducts] = useState(() => {
-        const saved = localStorage.getItem("chosenProducts");
+        const saved = localStorage.getItem(CHOSEN_PRODUCTS);
         return saved ? JSON.parse(saved) : [];
     });
 
     const [orderedProducts, setOrderedProducts] = useState(() => {
-        const saved = localStorage.getItem("orderedProducts");
+        const saved = localStorage.getItem(ORDERED_PRODUCTS);
         return saved ? JSON.parse(saved) : [];
     });
 
     useEffect(() => {
         console.log(isAuth);
-        localStorage.setItem("isAuth", JSON.stringify(isAuth));
+        localStorage.setItem(IS_AUTH, JSON.stringify(isAuth));
     }, [isAuth]);
 
     const changeChosenProducts = (productId) => {
@@ -28,7 +29,7 @@ export function AuthProvider({children}) {
             const newChosenProducts = isProductSelected
                 ? chosenProducts.filter(item => item !== productId)
                 : [...chosenProducts, productId]
-            localStorage.setItem("chosenProducts", JSON.stringify(newChosenProducts));
+            localStorage.setItem(CHOSEN_PRODUCTS, JSON.stringify(newChosenProducts));
             return newChosenProducts;
         });
     }
@@ -64,7 +65,7 @@ export function AuthProvider({children}) {
                     newOrderedProducts.splice(productIndex, 1);
                 }
             }
-            localStorage.setItem("orderedProducts", JSON.stringify(newOrderedProducts));
+            localStorage.setItem(ORDERED_PRODUCTS, JSON.stringify(newOrderedProducts));
             return newOrderedProducts;
         });
     }

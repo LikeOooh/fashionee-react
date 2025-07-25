@@ -5,11 +5,10 @@ import {SelectItem} from "../select-item/SelectItem.jsx";
 import {useEffect, useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
+import {filters} from "../../helpers/products.js";
 
 
 export function Sidebar() {
-    const categories = ['All', 'Men', 'Women', 'Accessories', 'New Arrivals'];
-    const colors = ['Black', 'Blue', 'Red', 'Yellow', 'Green'];
     const [selectedColors, setSelectedColors] = useState([]);
     const reviewedProducts = [
         {
@@ -55,6 +54,10 @@ export function Sidebar() {
     ]
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const categories = ["All", ...filters().categories];
+    const colors = [...filters().colors];
+    const priceMin = String(Math.round(filters().prices.min));
+    const priceMax = String(Math.round(filters().prices.max));
 
     useEffect(() => {
     }, [selectedColors]);
@@ -88,14 +91,14 @@ export function Sidebar() {
             <div className="sidebar__item">
                 <div className="h4">Price</div>
                 <div className="sidebar__price-bar">
-                    <input type="text" placeholder="0" className="input price"/>
-                    <input type="text" placeholder="200" className="input price"/>
+                    <input type="text" placeholder={priceMin} className="input price"/>
+                    <input type="text" placeholder={priceMax} className="input price"/>
                 </div>
             </div>
             <div className="sidebar__item">
                 <div className="h4">Colors</div>
                 <div className="sidebar__colors">
-                    {colors?.map((item) => (
+                    {colors.map((item) => (
                         <SelectItem key={item} value={item} isChecked={selectedColors.includes(item)}
                                     changeSelection={changeSelection}/>))}
                 </div>
