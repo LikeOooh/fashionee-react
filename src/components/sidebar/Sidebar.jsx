@@ -6,6 +6,7 @@ import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filters} from "../../helpers/products.js";
 import {Categories} from "../categories/Categories.jsx";
+import {Price} from "../price/Price.jsx";
 
 export function Sidebar() {
     const categories = ["All", ...filters().categories];
@@ -74,16 +75,17 @@ export function Sidebar() {
                     <Icon name="search" className="icon_search sidebar__search-icon"/>
                 </label>
             </div>
-            <Categories categories={categories} selectedCategory={selectedCategory} changeSelectedCategory={changeSelectedCategory}/>
-            <div className="sidebar__item">
-                <div className="h4">Price</div>
-                <div className="sidebar__price-bar">
-                    <input type="text" placeholder={minPrice} className="input price"
-                           onChange={(e) => changeMinPrice(e)}/>
-                    <input type="text" placeholder={maxPrice} className="input price"
-                           onChange={(e) => changeMaxPrice(e)}/>
-                </div>
-            </div>
+            <Categories
+                categories={categories}
+                selectedCategory={selectedCategory}
+                changeSelectedCategory={changeSelectedCategory}
+            />
+            <Price
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                changeMinPrice={changeMinPrice}
+                changeMaxPrice={changeMaxPrice}
+            />
             <div className="sidebar__item">
                 <div className="h4">Colors</div>
                 <div className="sidebar__colors">
