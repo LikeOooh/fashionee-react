@@ -4,15 +4,29 @@ import './Showcase.scss';
 import {Product} from "../product/Product.jsx";
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
+import {useEffect, useState} from "react";
+import {useDebounce} from "../../hooks/useDebounce.jsx";
 
 export function Showcase() {
-    const products = data.products;
-    const productCount = products?.length;
+    const [productsToView, setProductsToView] = useState(data.products);
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const productCount = productsToView?.length;
+
+    useEffect(() => {
+        if (debouncedSearchTerm) {
+            const newProductsToView = [...data.products];
+            setProductsToView(newProductsToView.filter(product => product.name.includes(debouncedSearchTerm)));
+        } else {
+            setProductsToView(data.products);
+        }
+    }, [searchTerm, debouncedSearchTerm]);
+
 
     return (
         <div className="container">
             <div className="showcase">
-                <Sidebar/>
+                <Sidebar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                 <div className="showcase__products-wrapper">
                     <div className="showcase__sort-and-count">
                         <div>
@@ -27,7 +41,7 @@ export function Showcase() {
                         </div>
                     </div>
                     <div className="showcase__products">
-                        {products.map((product) => (<Product key={product?.id} product={product}/>))}
+                        {productsToView.map((product) => (<Product key={product?.id} product={product}/>))}
                     </div>
                     <div className="showcase__pagination">
                         <div>

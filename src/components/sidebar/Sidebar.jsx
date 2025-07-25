@@ -1,14 +1,13 @@
 import './Sidebar.scss';
-import {Icon} from "../icon/Icon.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
-import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filters} from "../../helpers/products.js";
 import {Categories} from "../categories/Categories.jsx";
 import {Price} from "../price/Price.jsx";
 import {Colors} from "../colors/Colors.jsx";
+import {Search} from "../search/Search.jsx";
 
-export function Sidebar() {
+export function Sidebar({searchTerm, setSearchTerm}) {
     const categories = ["All", ...filters().categories];
     const colors = [...filters().colors];
     const [minPrice, setMinPrice] = useState(String(Math.round(filters().prices.min)));
@@ -57,24 +56,10 @@ export function Sidebar() {
             "image": "https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/54cdbf69f8e60ba13e2e795cd495567f.png/s/f1200x/a/534336/sc/265"
         },
     ]
-    const [searchTerm, setSearchTerm] = useState('');
-    const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
-    useEffect(() => {
-        if (debouncedSearchTerm) {
-            console.log('Ищем:', debouncedSearchTerm);
-        }
-    }, [debouncedSearchTerm]);
 
     return (
         <div className="sidebar">
-            <div className="sidebar__search">
-                <label>
-                    <input type="text" placeholder="Search" className="input sidebar__search-row" value={searchTerm}
-                           onChange={(e) => setSearchTerm(e.target.value)}/>
-                    <Icon name="search" className="icon_search sidebar__search-icon"/>
-                </label>
-            </div>
+            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             <Categories
                 categories={categories}
                 selectedCategory={selectedCategory}

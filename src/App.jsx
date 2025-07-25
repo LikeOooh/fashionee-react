@@ -8,18 +8,17 @@ import {useEffect, useState} from "react";
 
 export function App() {
     const pages = ['Cart', 'Shop'];
-    const [page, setPage] = useState("Shop");
+    const [pageName, setPageName] = useState("Shop");
 
     useEffect(() => {
-        console.log(page);
-    }, [page]);
+    }, [pageName]);
 
     return (
         <AuthProvider>
-            <Header page={page} setPage={setPage}/>
-            <ContentBlock page={page} pages={pages} setPage={setPage}/>
-            {page === "Shop" && <Showcase/>}
-            {page === "Cart" && <Cart/>}
+            <Header page={pageName} setPage={setPageName}/>
+            <ContentBlock page={pageName} pages={pages} setPage={setPageName}/>
+            {pageName === "Shop" && <Showcase/>}
+            {pageName === "Cart" && <Cart/>}
             <Footer/>
         </AuthProvider>
     )

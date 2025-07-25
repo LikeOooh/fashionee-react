@@ -20,7 +20,6 @@ export function AuthProvider({children}) {
     });
 
     useEffect(() => {
-        console.log(isAuth);
         localStorage.setItem(IS_AUTH, JSON.stringify(isAuth));
     }, [isAuth]);
 
