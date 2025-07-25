@@ -3,6 +3,7 @@ import {AuthContext} from "./AuthContext.jsx";
 import {IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS} from "../constants/localStorage.js";
 
 export function AuthProvider({children}) {
+    //localStorage.clear();
     const [isAuth, setIsAuth] = useState(() => {
         const saved = localStorage.getItem(IS_AUTH);
         return saved ? JSON.parse(saved) : false;

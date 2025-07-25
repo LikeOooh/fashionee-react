@@ -27,7 +27,7 @@ export function Footer() {
                     </div>
                     <div className="footer__info-column column-3">
                         <div className="title h5">Useful links</div>
-                        <CustomList custList={usefulLinks}/>
+                        <CustomList custList={usefulLinks} onClick/>
                     </div>
                     <div className="footer__info-column column-4">
                         <div className="title h5">Newsletter</div>

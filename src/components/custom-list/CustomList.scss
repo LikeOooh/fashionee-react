@@ -27,19 +27,12 @@
       background-image: url("../../icons/square.svg");
       width: 3px;
       height: 3px;
+      background-color: rgba(68, 68, 68, 1);
     }
 
     &.active {
-      color: rgba(255, 142, 142, 1);
       list-style: none;
-
-      &::before {
-        content: "";
-        display: flex;
-        width: 25px;
-        height: 3px;
-        background-image: url("../../icons/small-row.svg");
-      }
+      color: rgba(255, 142, 142, 1);
     }
 
     &.sidebar-list {
@@ -54,6 +47,14 @@
   &.sidebar-list .custom-list__item::before {
     width: 5px;
     height: 5px;
+  }
 
+  &.sidebar-list .custom-list__item.active::before {
+    content: "";
+    display: flex;
+    width: 25px;
+    height: 3px;
+    background-color: rgba(255, 142, 142, 1);
+    background-image: url("../../icons/small-row.svg");
   }
 }

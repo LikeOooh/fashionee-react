@@ -1,14 +1,18 @@
 import './Sidebar.scss';
 import {Icon} from "../icon/Icon.jsx";
-import {CustomList} from "../custom-list/CustomList.jsx";
 import {SelectItem} from "../select-item/SelectItem.jsx";
 import {useEffect, useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filters} from "../../helpers/products.js";
-
+import {Categories} from "../categories/Categories.jsx";
 
 export function Sidebar() {
+    const categories = ["All", ...filters().categories];
+    const colors = [...filters().colors];
+    const [minPrice, setMinPrice] = useState(String(Math.round(filters().prices.min)));
+    const [maxPrice, setMaxPrice] = useState(String(Math.round(filters().prices.max)));
+    const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedColors, setSelectedColors] = useState([]);
     const reviewedProducts = [
         {
@@ -54,26 +58,12 @@ export function Sidebar() {
     ]
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
-    const categories = ["All", ...filters().categories];
-    const colors = [...filters().colors];
-    const priceMin = String(Math.round(filters().prices.min));
-    const priceMax = String(Math.round(filters().prices.max));
-
-    useEffect(() => {
-    }, [selectedColors]);
 
     useEffect(() => {
         if (debouncedSearchTerm) {
             console.log('Ищем:', debouncedSearchTerm);
         }
     }, [debouncedSearchTerm]);
-
-    const changeSelection = (value) => {
-        const newSelectedColors = selectedColors.includes(value)
-            ? selectedColors.filter(item => item !== value)
-            : [...selectedColors, value];
-        setSelectedColors(newSelectedColors);
-    }
 
     return (
         <div className="sidebar">
@@ -84,15 +74,14 @@ export function Sidebar() {
                     <Icon name="search" className="icon_search sidebar__search-icon"/>
                 </label>
             </div>
-            <div className="sidebar__item">
-                <div className="h4">Categories</div>
-                <CustomList custList={categories} className="sidebar-list"/>
-            </div>
+            <Categories categories={categories} selectedCategory={selectedCategory} changeSelectedCategory={changeSelectedCategory}/>
             <div className="sidebar__item">
                 <div className="h4">Price</div>
                 <div className="sidebar__price-bar">
-                    <input type="text" placeholder={priceMin} className="input price"/>
-                    <input type="text" placeholder={priceMax} className="input price"/>
+                    <input type="text" placeholder={minPrice} className="input price"
+                           onChange={(e) => changeMinPrice(e)}/>
+                    <input type="text" placeholder={maxPrice} className="input price"
+                           onChange={(e) => changeMaxPrice(e)}/>
                 </div>
             </div>
             <div className="sidebar__item">
@@ -100,7 +89,7 @@ export function Sidebar() {
                 <div className="sidebar__colors">
                     {colors.map((item) => (
                         <SelectItem key={item} value={item} isChecked={selectedColors.includes(item)}
-                                    changeSelection={changeSelection}/>))}
+                                    changeSelection={changeSelectedColors}/>))}
                 </div>
             </div>
             <div className="sidebar__item">
@@ -124,4 +113,23 @@ export function Sidebar() {
             </div>
         </div>
     )
+
+    function changeSelectedCategory(category) {
+        setSelectedCategory(category);
+    }
+
+    function changeMinPrice(e) {
+        setMinPrice(e.target.value);
+    }
+
+    function changeMaxPrice(e) {
+        setMaxPrice(e.target.value);
+    }
+
+    function changeSelectedColors(color) {
+        const newSelectedColors = selectedColors.includes(color)
+            ? selectedColors.filter(item => item !== color)
+            : [...selectedColors, color];
+        setSelectedColors(newSelectedColors);
+    }
 }

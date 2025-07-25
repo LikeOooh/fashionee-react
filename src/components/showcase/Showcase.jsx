@@ -1,9 +1,12 @@
+import data from '/data/products.json';
+
 import './Showcase.scss';
 import {Product} from "../product/Product.jsx";
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
 
-export function Showcase({products}) {
+export function Showcase() {
+    const products = data.products;
     const productCount = products?.length;
 
     return (

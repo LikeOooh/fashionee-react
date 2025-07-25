@@ -1,4 +1,3 @@
-import data from '/data/products.json'
 import {Header} from "./components/header/Header.jsx";
 import {ContentBlock} from "./components/content-block/ContentBlock.jsx";
 import {Footer} from "./components/footer/Footer.jsx";
@@ -10,8 +9,6 @@ import {useEffect, useState} from "react";
 export function App() {
     const pages = ['Cart', 'Shop'];
     const [page, setPage] = useState("Shop");
-    const products = data.products;
-    //localStorage.clear();
 
     useEffect(() => {
         console.log(page);
@@ -19,12 +16,11 @@ export function App() {
 
     return (
         <AuthProvider>
-            < Header page={page} setPage={setPage}/>
+            <Header page={page} setPage={setPage}/>
             <ContentBlock page={page} pages={pages} setPage={setPage}/>
-            {page === "Shop" && <Showcase products={products}/>}
+            {page === "Shop" && <Showcase/>}
             {page === "Cart" && <Cart/>}
             <Footer/>
         </AuthProvider>
     )
-
 }
