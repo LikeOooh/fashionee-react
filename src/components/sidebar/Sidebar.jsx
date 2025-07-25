@@ -1,12 +1,12 @@
 import './Sidebar.scss';
 import {Icon} from "../icon/Icon.jsx";
-import {SelectItem} from "../select-item/SelectItem.jsx";
 import {useEffect, useState} from "react";
 import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filters} from "../../helpers/products.js";
 import {Categories} from "../categories/Categories.jsx";
 import {Price} from "../price/Price.jsx";
+import {Colors} from "../colors/Colors.jsx";
 
 export function Sidebar() {
     const categories = ["All", ...filters().categories];
@@ -86,14 +86,11 @@ export function Sidebar() {
                 changeMinPrice={changeMinPrice}
                 changeMaxPrice={changeMaxPrice}
             />
-            <div className="sidebar__item">
-                <div className="h4">Colors</div>
-                <div className="sidebar__colors">
-                    {colors.map((item) => (
-                        <SelectItem key={item} value={item} isChecked={selectedColors.includes(item)}
-                                    changeSelection={changeSelectedColors}/>))}
-                </div>
-            </div>
+            <Colors
+                colors={colors}
+                selectedColors={selectedColors}
+                changeSelectedColors={changeSelectedColors}
+            />
             <div className="sidebar__item">
                 <div className="button-wrapper">
                     <button className="button">Apply Filter</button>
