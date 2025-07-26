@@ -6,27 +6,49 @@ import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
 import {useEffect, useState} from "react";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
+import {filterProducts, filters} from "../../helpers/products.js";
 
 export function Showcase() {
     const [productsToView, setProductsToView] = useState(data.products);
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    const [prices, setPrices] = useState({min: 0, max: Math.round(filters().prices.max) || 0})
+    const [selectedColors, setSelectedColors] = useState([]);
     const productCount = productsToView?.length;
 
+    //применение фильтров и поиск с учетом фильтрации
     useEffect(() => {
-        if (debouncedSearchTerm) {
-            const newProductsToView = [...data.products];
-            setProductsToView(newProductsToView.filter(product => product.name.includes(debouncedSearchTerm)));
-        } else {
-            setProductsToView(data.products);
+        const filtersApplied = {
+            category: selectedCategory,
+            prices: prices,
+            colors: selectedColors,
         }
-    }, [searchTerm, debouncedSearchTerm]);
+        const filteredProducts = filterProducts([...data.products], filtersApplied);
+        setProductsToView(debouncedSearchTerm.length > 0 ? filteredProducts.filter(product => product.name.includes(debouncedSearchTerm)) : filteredProducts);
+    }, [searchTerm, debouncedSearchTerm, selectedCategory, prices, selectedColors]);
 
+
+    function changeSelectedCategory(category) {
+        setSelectedCategory(category);
+    }
+
+    function changeSelectedColors(colors) {
+        setSelectedColors(colors);
+    }
 
     return (
         <div className="container">
             <div className="showcase">
-                <Sidebar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                <Sidebar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    selectedCategory={selectedCategory}
+                    changeSelectedCategory={changeSelectedCategory}
+                    setPrices={setPrices}
+                    selectedColors={selectedColors}
+                    changeSelectedColors={changeSelectedColors}
+                />
                 <div className="showcase__products-wrapper">
                     <div className="showcase__sort-and-count">
                         <div>
@@ -41,7 +63,10 @@ export function Showcase() {
                         </div>
                     </div>
                     <div className="showcase__products">
-                        {productsToView.map((product) => (<Product key={product?.id} product={product}/>))}
+                        {(productsToView.length > 0)
+                            ? productsToView.map(product => <Product key={product?.id} product={product}/>)
+                            : <>No products found</>
+                        }
                     </div>
                     <div className="showcase__pagination">
                         <div>
@@ -61,3 +86,4 @@ export function Showcase() {
         </div>
     )
 }
+
