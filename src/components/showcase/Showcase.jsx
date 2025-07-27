@@ -3,14 +3,15 @@ import data from '/data/products.json';
 import './Showcase.scss';
 import {Product} from "../product/Product.jsx";
 import {Sidebar} from "../sidebar/Sidebar.jsx";
-import {Icon} from "../icon/Icon.jsx";
 import {useEffect, useMemo, useState} from "react";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filterProducts, filters} from "../../helpers/products.js";
 import {sortProducts} from "../../helpers/sort.js";
 import {Sort} from "../sort/Sort.jsx";
+import {Pagination} from "../pagination/Pagination.jsx";
 
 const initialFilters = filters();
+const productsPerPage = 9;
 
 export function Showcase() {
     const [productsToView, setProductsToView] = useState(data.products);
@@ -20,7 +21,22 @@ export function Showcase() {
     const [prices, setPrices] = useState({min: 0, max: Math.round(initialFilters.prices.max) || 0})
     const [selectedColors, setSelectedColors] = useState([]);
     const [selectedSort, setSelectedSort] = useState('RELEVANCE');
+    const [currentPage, setCurrentPage] = useState(1);
     const productCount = productsToView?.length;
+
+    const slicedProducts = useMemo(() => {
+        const start = (currentPage - 1) * productsPerPage;
+        return productsToView.slice(start, start + productsPerPage);
+    }, [productsToView, currentPage]);
+
+    const {totalPages, pages} = useMemo(() => {
+        const total = Math.ceil(productsToView.length / productsPerPage);
+        return {
+            totalPages: total,
+            pages: Array.from({length: total}, (_, i) => i + 1),
+        };
+    }, [productsToView.length]);
+    console.log(currentPage);
 
     const filteredAndSortedProducts = useMemo(() => {
         const filtersApplied = {
@@ -38,6 +54,7 @@ export function Showcase() {
     //применение фильтров и поиск с учетом фильтрации и сортировки
     useEffect(() => {
         setProductsToView(filteredAndSortedProducts);
+        setCurrentPage(1);
     }, [filteredAndSortedProducts]);
 
     return (
@@ -55,25 +72,13 @@ export function Showcase() {
                 <div className="showcase__products-wrapper">
                     <Sort productCount={productCount} changeSortType={setSelectedSort}/>
                     <div className="showcase__products">
-                        {(productsToView.length > 0)
-                            ? productsToView.map(product => <Product key={product?.id} product={product}/>)
+                        {(slicedProducts.length > 0)
+                            ? slicedProducts.map(product => <Product key={product?.id} product={product}/>)
                             : <>No products found</>
                         }
                     </div>
-
-                    <div className="showcase__pagination">
-                        <div>
-                            <Icon name="left-pagin-arrow" className="icon_pagin-arrow"/>
-                        </div>
-                        <div className="showcase__pages">
-                            <div className="showcase__page active">1</div>
-                            <div className="showcase__page">2</div>
-                            <div className="showcase__page">3</div>
-                        </div>
-                        <div>
-                            <Icon name="right-pagin-arrow" className="icon_pagin-arrow"/>
-                        </div>
-                    </div>
+                    <Pagination totalPages={totalPages} pages={pages} currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}/>
                 </div>
             </div>
         </div>
@@ -87,4 +92,3 @@ export function Showcase() {
         setSelectedColors(colors);
     }
 }
-
