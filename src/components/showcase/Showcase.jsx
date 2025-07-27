@@ -4,30 +4,39 @@ import './Showcase.scss';
 import {Product} from "../product/Product.jsx";
 import {Sidebar} from "../sidebar/Sidebar.jsx";
 import {Icon} from "../icon/Icon.jsx";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filterProducts, filters} from "../../helpers/products.js";
+
+const initialFilters = filters();
 
 export function Showcase() {
     const [productsToView, setProductsToView] = useState(data.products);
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const [prices, setPrices] = useState({min: 0, max: Math.round(filters().prices.max) || 0})
+    const [prices, setPrices] = useState({min: 0, max: Math.round(initialFilters.prices.max) || 0})
     const [selectedColors, setSelectedColors] = useState([]);
-    const [selectedSort, setSelectedSort] = useState('');
+    const [selectedSort, setSelectedSort] = useState('RELEVANCE');
     const productCount = productsToView?.length;
 
-    //применение фильтров и поиск с учетом фильтрации и сортировки
-    useEffect(() => {
+    const filteredAndSortedProducts = useMemo(() => {
         const filtersApplied = {
             category: selectedCategory,
             prices: prices,
             colors: selectedColors,
         }
-        const filteredProducts = sortProducts(filterProducts([...data.products], filtersApplied), selectedSort);
-        setProductsToView(debouncedSearchTerm.length > 0 ? filteredProducts.filter(product => product.name.includes(debouncedSearchTerm)) : filteredProducts);
-    }, [selectedSort, searchTerm, debouncedSearchTerm, selectedCategory, prices, selectedColors]);
+        const filtered = filterProducts(data.products, filtersApplied)
+        const sorted = sortProducts([...filtered], selectedSort);
+        return debouncedSearchTerm
+            ? sorted.filter(product => product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
+            : sorted;
+    }, [selectedSort, debouncedSearchTerm, selectedCategory, prices, selectedColors])
+
+    //применение фильтров и поиск с учетом фильтрации и сортировки
+    useEffect(() => {
+        setProductsToView(filteredAndSortedProducts);
+    }, [filteredAndSortedProducts]);
 
     return (
         <div className="container">
@@ -59,7 +68,7 @@ export function Showcase() {
                     </div>
 
                     <div className="showcase__products">
-                    {(productsToView.length > 0)
+                        {(productsToView.length > 0)
                             ? productsToView.map(product => <Product key={product?.id} product={product}/>)
                             : <>No products found</>
                         }
@@ -91,24 +100,23 @@ export function Showcase() {
         setSelectedColors(colors);
     }
 
-    function sortProducts (products, sortType) {
+    function sortProducts(products, sortType) {
+        const productsSorted = [...products];
         switch (sortType) {
-            case "RELEVANCE":
-                break;
             case "NAME_AZ":
-                products.sort((a, b) => a.name > b.name ? 1 : -1);
+                productsSorted.sort((a, b) => a.name.localeCompare(b.name));
                 break;
             case "NAME_ZA":
-                products.sort((a, b) => a.name < b.name ? 1 : -1);
+                productsSorted.sort((a, b) => b.name.localeCompare(a.name));
                 break;
             case "PRICE_ASC":
-                products.sort((a, b) => a.price > b.price ? 1 : -1);
+                productsSorted.sort((a, b) => a.price - b.price);
                 break;
             case "PRICE_DESC":
-                products.sort((a, b) => a.price < b.price ? 1 : -1);
+                productsSorted.sort((a, b) => b.price - a.price);
                 break;
         }
-        return products;
+        return productsSorted;
     }
 }
 
