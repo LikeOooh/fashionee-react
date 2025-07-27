@@ -7,6 +7,8 @@ import {Icon} from "../icon/Icon.jsx";
 import {useEffect, useMemo, useState} from "react";
 import {useDebounce} from "../../hooks/useDebounce.jsx";
 import {filterProducts, filters} from "../../helpers/products.js";
+import {sortProducts} from "../../helpers/sort.js";
+import {Sort} from "../sort/Sort.jsx";
 
 const initialFilters = filters();
 
@@ -51,22 +53,7 @@ export function Showcase() {
                     changeSelectedColors={changeSelectedColors}
                 />
                 <div className="showcase__products-wrapper">
-
-                    <div className="showcase__sort-and-count">
-                        <div>
-                            There are <span className="showcase__bold">{productCount}</span> products in this item
-                        </div>
-                        <div className="showcase__sort">
-                            <select className="input showcase__input" onChange={(e) => setSelectedSort(e.target.value)}>
-                                <option value="RELEVANCE">By relevance</option>
-                                <option value="NAME_AZ">From A to Z</option>
-                                <option value="NAME_ZA">From Z to A</option>
-                                <option value="PRICE_ASC">From low to high</option>
-                                <option value="PRICE_DESC">From high to low</option>
-                            </select>
-                        </div>
-                    </div>
-
+                    <Sort productCount={productCount} changeSortType={setSelectedSort}/>
                     <div className="showcase__products">
                         {(productsToView.length > 0)
                             ? productsToView.map(product => <Product key={product?.id} product={product}/>)
@@ -98,25 +85,6 @@ export function Showcase() {
 
     function changeSelectedColors(colors) {
         setSelectedColors(colors);
-    }
-
-    function sortProducts(products, sortType) {
-        const productsSorted = [...products];
-        switch (sortType) {
-            case "NAME_AZ":
-                productsSorted.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case "NAME_ZA":
-                productsSorted.sort((a, b) => b.name.localeCompare(a.name));
-                break;
-            case "PRICE_ASC":
-                productsSorted.sort((a, b) => a.price - b.price);
-                break;
-            case "PRICE_DESC":
-                productsSorted.sort((a, b) => b.price - a.price);
-                break;
-        }
-        return productsSorted;
     }
 }
 
