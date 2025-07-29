@@ -102,7 +102,7 @@ export function Sidebar({searchTerm, setSearchTerm, selectedCategory, changeSele
                 <div className="h4">Reviewed By You</div>
                 <div>
                     <div className="sidebar__reviewed-products">
-                        {reviewedProducts?.map((item) => (<ReviewedProduct key={item?.id} product={item}/>))}
+                        {reviewedProducts?.map((reviewedProduct) => (<ReviewedProduct key={reviewedProduct?.id} product={reviewedProduct}/>))}
                     </div>
                 </div>
             </div>

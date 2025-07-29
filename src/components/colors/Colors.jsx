@@ -6,8 +6,8 @@ export function Colors({colors, colorsSelection, changeSelectedColors}) {
         <div>
             <div className="h4">Colors</div>
             <div className="colors">
-                {colors.map((item) => (
-                    <SelectItem key={item} value={item} isChecked={colorsSelection.includes(item)}
+                {colors.map((color) => (
+                    <SelectItem key={color} value={color} isChecked={colorsSelection.includes(color)}
                                 changeSelection={changeSelectedColors}/>))}
             </div>
         </div>

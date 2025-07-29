@@ -12,7 +12,7 @@ export function ContentBlock({ page, setPage, pages}) {
                     <div className="content-block__breadcrumbs">
                         <ul className="content-block__crumb-list">
                             <li className="content-block__crumb-vertical-line"></li>
-                            {pages?.map((item) => (<li key={item} className={item === page ? "content-block__crumb active" : "content-block__crumb"} onClick={() => setPage(item)}>{item}</li>))}
+                            {pages?.map((page) => (<li key={page} className={page === page ? "content-block__crumb active" : "content-block__crumb"} onClick={() => setPage(page)}>{page}</li>))}
                         </ul>
                     </div>
                     <div className="content-block__horizontal-line"></div>
