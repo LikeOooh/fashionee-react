@@ -45,7 +45,7 @@ export function Cart() {
                     <div className="cart__title">Your Order</div>
                     <div className="cart__order-price-wrapper">
                         <CartPriceRow type="price" rowName="Order price" value={totalPrice.toFixed(2)} info=""/>
-                        <CartPriceRow type="promocode" rowName="Discount for promo code" value="No" info=""/>
+                        <CartPriceRow type="promoCode" rowName="Discount for promo code" value="No" info=""/>
                         {deliveryValue !== 0 && <CartPriceRow type="delivery" rowName="Delivery" value={deliveryValue}
                                                               info="(Aug 02 at 16:00)"/>}
                         <CartPriceRow type="total" rowName="Total" value={totalOrderPrice.toFixed(2)} info=""/>

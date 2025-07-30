@@ -1,6 +1,12 @@
+@import '../../variables';
+
 .showcase {
   display: flex;
   gap: 50px;
+
+  @media (max-width: $tablet-landscape) {
+    gap: 20px;
+  }
 
   &__products-wrapper {
     max-width: 846px;
@@ -8,11 +14,28 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+
+    @media (max-width: $tablet-landscape) {
+      max-width: 564px;
+    }
+
+    @media (max-width: $mobile-large) {
+      align-items: center;
+    }
   }
 
   &__products {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
     gap: 50px 30px;
+
+    @media (max-width: $tablet-portrait) {
+      gap: 10px;
+    }
+
+    @media (max-width: $mobile-small) {
+      display: block;
+    }
   }
 }

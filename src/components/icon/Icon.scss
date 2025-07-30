@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .icon {
   height: 20px;
   width: 20px;
@@ -43,6 +45,10 @@
     height: 130px;
     top: 30px;
     left: 30px;
+
+    @media (max-width: $tablet-portrait) {
+      display: none;
+    }
   }
 
   &_vector-object-290 {
@@ -52,6 +58,10 @@
     height: 290px;
     top: 85px;
     right: 30px;
+
+    @media (max-width: $tablet-portrait) {
+      display: none;
+    }
   }
 
   &_pagin-arrow {

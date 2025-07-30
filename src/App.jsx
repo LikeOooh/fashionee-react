@@ -7,7 +7,7 @@ import {AuthProvider} from './hooks/AuthProvider.jsx';
 import {useEffect, useState} from "react";
 
 export function App() {
-    const pages = ['Cart', 'Shop'];
+    const pageNames = ['Cart', 'Shop'];
     const [pageName, setPageName] = useState("Shop");
 
     useEffect(() => {
@@ -15,8 +15,8 @@ export function App() {
 
     return (
         <AuthProvider>
-            <Header page={pageName} setPage={setPageName}/>
-            <ContentBlock page={pageName} pages={pages} setPage={setPageName}/>
+            <Header pageName={pageName} setPageName={setPageName}/>
+            <ContentBlock pageName={pageName} pageNames={pageNames} setPageName={setPageName}/>
             {pageName === "Shop" && <Showcase/>}
             {pageName === "Cart" && <Cart/>}
             <Footer/>

@@ -3,7 +3,7 @@ import './Sort.scss';
 export function Sort({productCount, changeSortType}) {
     return (
         <div className="sort-and-count">
-            <div>
+            <div className="sort">
                 There are <span className="sort__bold">{productCount}</span> products in this item
             </div>
             <div className="sort">

@@ -11,7 +11,7 @@ import {Sort} from "../sort/Sort.jsx";
 import {Pagination} from "../pagination/Pagination.jsx";
 
 const initialFilters = filters();
-const productsPerPage = 9;
+const productsPerPage = 12;
 
 export function Showcase() {
     const [productsToView, setProductsToView] = useState(data.products);

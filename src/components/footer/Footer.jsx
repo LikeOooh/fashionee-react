@@ -9,10 +9,11 @@ export function Footer() {
     const usefulLinks = ['Privacy Policy', 'Terms of use', 'Support', 'Shipping details', 'FAQs'];
 
     return (
-        <footer className="footer">
-            <Icon name="vector-object-130" className="icon_vector-object-130"/>
-            <Icon name="vector-object-290" className="icon_vector-object-290"/>
-            <div className="container">
+        <div className="container">
+            <footer className="footer">
+                <Icon name="vector-object-130" className="icon_vector-object-130"/>
+                <Icon name="vector-object-290" className="icon_vector-object-290"/>
+
                 <div className="footer__info">
                     <div className="footer__info-column column-1">
                         <Logo/>
@@ -59,6 +60,6 @@ export function Footer() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>)
+            </footer>
+        </div>)
 }

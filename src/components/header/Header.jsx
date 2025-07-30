@@ -6,7 +6,7 @@ import {Burger} from "../burger/Burger.jsx";
 import {AuthContext} from '../../hooks/AuthContext';
 import {useContext} from "react";
 
-export function Header({page, setPage}) {
+export function Header({pageName, setPageName}) {
     const {
         isAuth,
         setIsAuth,
@@ -22,11 +22,11 @@ export function Header({page, setPage}) {
                 <Burger/>
                 <Logo/>
                 <div className="header__menu">
-                    <MenuItem title="Home" icon={false} isAactive={page === "home"}/>
-                    <MenuItem title="Pages" icon={true} isAactive={page === "pages"}/>
-                    <MenuItem title="Shop" icon={true} onClick={() => setPage("Shop")} isAactive={page === "Shop"}/>
-                    <MenuItem title="Blog" icon={false} isAactive={page === "blog"}/>
-                    <MenuItem title="Contact" icon={false} isAactive={page === "contact"}/>
+                    <MenuItem title="Home" icon={false} isAactive={pageName === "home"}/>
+                    <MenuItem title="Pages" icon={true} isAactive={pageName === "pages"}/>
+                    <MenuItem title="Shop" icon={true} onClick={() => setPageName("Shop")} isAactive={pageName === "Shop"}/>
+                    <MenuItem title="Blog" icon={false} isAactive={pageName === "blog"}/>
+                    <MenuItem title="Contact" icon={false} isAactive={pageName === "contact"}/>
                 </div>
             </div>
             <div className="header__right-side">
@@ -40,7 +40,7 @@ export function Header({page, setPage}) {
                         <Icon name="heart" className="icon_medium"/>
                         <div className="header__counter"><span>{chosenProducts?.length}</span></div>
                     </div>
-                    <div className="header__icon-counter" onClick={() => setPage("Cart")}>
+                    <div className="header__icon-counter" onClick={() => setPageName("Cart")}>
                         <Icon name="cart" className="icon_medium"/>
                         <div className="header__counter"><span>{totalOrderedCount}</span></div>
                     </div>

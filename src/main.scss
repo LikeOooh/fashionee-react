@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Raleway:wght@100..900&display=swap');
+@import 'variables';
 
 *, root, body {
   box-sizing: border-box;
@@ -13,7 +14,6 @@
 
 
 html {
-  justify-content: center;
   min-width: 375px;
 }
 
@@ -48,6 +48,10 @@ html {
   max-width: 1140px;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: $tablet-landscape) {
+    max-width: 840px;
+  }
 }
 
 .input {

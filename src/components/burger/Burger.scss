@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .burger {
   cursor: pointer;
   display: block;
@@ -45,5 +47,19 @@
     bottom: 6px;
     transform: rotate(-45deg);
     transition: bottom .3s, transform .3s .15s;
+  }
+
+  @media (max-width: $tablet-portrait) {
+    &-checkbox:checked~.header__menu {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 28px;
+      height: 140px;
+      width: 840px;
+      z-index: 1;
+      background-color: #ffffff;
+      flex-direction: column;
+    }
   }
 }
