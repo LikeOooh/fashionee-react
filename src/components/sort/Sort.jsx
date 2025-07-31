@@ -1,6 +1,6 @@
 import './Sort.scss';
 
-export function Sort({productCount, changeSortType}) {
+export function Sort({ productCount, changeSortType }) {
     return (
         <div className="sort-and-count">
             <div className="sort">
@@ -16,5 +16,5 @@ export function Sort({productCount, changeSortType}) {
                 </select>
             </div>
         </div>
-    )
+    );
 }

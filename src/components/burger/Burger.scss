@@ -50,7 +50,7 @@
   }
 
   @media (max-width: v.$tablet-portrait) {
-    &-checkbox:checked~.header__menu {
+    &-checkbox:checked ~ .header__menu {
       display: block;
       position: absolute;
       left: 0;

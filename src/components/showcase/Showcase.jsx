@@ -1,14 +1,14 @@
 import data from '/data/products.json';
 
 import './Showcase.scss';
-import {Product} from "../product/Product.jsx";
-import {Sidebar} from "../sidebar/Sidebar.jsx";
-import {useEffect, useMemo, useState} from "react";
-import {useDebounce} from "../../hooks/useDebounce.jsx";
-import {filterProducts, filters} from "../../helpers/products.js";
-import {sortProducts} from "../../helpers/sort.js";
-import {Sort} from "../sort/Sort.jsx";
-import {Pagination} from "../pagination/Pagination.jsx";
+import { Product } from '../product/Product.jsx';
+import { Sidebar } from '../sidebar/Sidebar.jsx';
+import { useEffect, useMemo, useState } from 'react';
+import { useDebounce } from '../../hooks/useDebounce.jsx';
+import { filterProducts, filters } from '../../helpers/products.js';
+import { sortProducts } from '../../helpers/sort.js';
+import { Sort } from '../sort/Sort.jsx';
+import { Pagination } from '../pagination/Pagination.jsx';
 
 const initialFilters = filters();
 const productsPerPage = 12;
@@ -17,8 +17,8 @@ export function Showcase() {
     const [productsToView, setProductsToView] = useState(data.products);
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const [prices, setPrices] = useState({min: 0, max: Math.round(initialFilters.prices.max) || 0})
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [prices, setPrices] = useState({ min: 0, max: Math.round(initialFilters.prices.max) || 0 });
     const [selectedColors, setSelectedColors] = useState([]);
     const [selectedSort, setSelectedSort] = useState('RELEVANCE');
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,11 +29,11 @@ export function Showcase() {
         return productsToView.slice(start, start + productsPerPage);
     }, [productsToView, currentPage]);
 
-    const {totalPages, pages} = useMemo(() => {
+    const { totalPages, pages } = useMemo(() => {
         const total = Math.ceil(productsToView.length / productsPerPage);
         return {
             totalPages: total,
-            pages: Array.from({length: total}, (_, i) => i + 1),
+            pages: Array.from({ length: total }, (_, i) => i + 1),
         };
     }, [productsToView.length]);
 
@@ -42,13 +42,13 @@ export function Showcase() {
             category: selectedCategory,
             prices: prices,
             colors: selectedColors,
-        }
-        const filtered = filterProducts(data.products, filtersApplied)
+        };
+        const filtered = filterProducts(data.products, filtersApplied);
         const sorted = sortProducts([...filtered], selectedSort);
         return debouncedSearchTerm
-            ? sorted.filter(product => product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
+            ? sorted.filter((product) => product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
             : sorted;
-    }, [selectedSort, debouncedSearchTerm, selectedCategory, prices, selectedColors])
+    }, [selectedSort, debouncedSearchTerm, selectedCategory, prices, selectedColors]);
 
     //применение фильтров и поиск с учетом фильтрации и сортировки
     useEffect(() => {
@@ -69,19 +69,24 @@ export function Showcase() {
                     changeSelectedColors={changeSelectedColors}
                 />
                 <div className="showcase__products-wrapper">
-                    <Sort productCount={productCount} changeSortType={setSelectedSort}/>
+                    <Sort productCount={productCount} changeSortType={setSelectedSort} />
                     <div className="showcase__products">
-                        {(slicedProducts.length > 0)
-                            ? slicedProducts.map(product => <Product key={product?.id} product={product}/>)
-                            : <>No products found</>
-                        }
+                        {slicedProducts.length > 0 ? (
+                            slicedProducts.map((product) => <Product key={product?.id} product={product} />)
+                        ) : (
+                            <>No products found</>
+                        )}
                     </div>
-                    <Pagination totalPages={totalPages} pages={pages} currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}/>
+                    <Pagination
+                        totalPages={totalPages}
+                        pages={pages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
                 </div>
             </div>
         </div>
-    )
+    );
 
     function changeSelectedCategory(category) {
         setSelectedCategory(category);

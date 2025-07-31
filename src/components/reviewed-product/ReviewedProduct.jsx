@@ -1,10 +1,10 @@
-import './ReviewedProduct.scss'
+import './ReviewedProduct.scss';
 
-export function ReviewedProduct ({product}) {
+export function ReviewedProduct({ product }) {
     return (
         <div className="reviewed-product">
             <div className="reviewed-product__image">
-                <img src={product?.image} alt={product?.name}/>
+                <img src={product?.image} alt={product?.name} />
             </div>
             <div className="reviewed-product__info">
                 <div className="reviewed-product__name">{product?.name}</div>
@@ -14,5 +14,5 @@ export function ReviewedProduct ({product}) {
                 </div>
             </div>
         </div>
-    )
+    );
 }

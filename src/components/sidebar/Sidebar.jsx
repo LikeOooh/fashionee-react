@@ -1,59 +1,60 @@
 import './Sidebar.scss';
-import {useState} from "react";
-import {ReviewedProduct} from "../reviewed-product/ReviewedProduct.jsx";
-import {filters} from "../../helpers/products.js";
-import {Categories} from "../categories/Categories.jsx";
-import {Price} from "../price/Price.jsx";
-import {Colors} from "../colors/Colors.jsx";
-import {Search} from "../search/Search.jsx";
+import { useState } from 'react';
+import { ReviewedProduct } from '../reviewed-product/ReviewedProduct.jsx';
+import { filters } from '../../helpers/products.js';
+import { Categories } from '../categories/Categories.jsx';
+import { Price } from '../price/Price.jsx';
+import { Colors } from '../colors/Colors.jsx';
+import { Search } from '../search/Search.jsx';
 
-export function Sidebar({searchTerm, setSearchTerm, selectedCategory, changeSelectedCategory, setPrices, selectedColors, changeSelectedColors}) {
-    const categories = ["All", ...filters().categories];
+export function Sidebar({
+    searchTerm,
+    setSearchTerm,
+    selectedCategory,
+    changeSelectedCategory,
+    setPrices,
+    selectedColors,
+    changeSelectedColors,
+}) {
+    const categories = ['All', ...filters().categories];
     const colors = [...filters().colors];
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(Math.round(filters().prices.max) || 0);
     const [categorySelection, setCategorySelection] = useState(selectedCategory);
-    const [colorsSelection, setColorsSelection] =useState(selectedColors);
+    const [colorsSelection, setColorsSelection] = useState(selectedColors);
     const reviewedProducts = [
         {
-            "id": 18,
-            "name": "Retro style handbag (2)",
-            "price": 35.99,
-            "oldPrice": 52.99,
-            "isSale": true,
-            "isNew": false,
-            "categories": [
-                "Women",
-                "Accessories"
-            ],
-            "color": "Brown",
-            "image": "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/c3d454c3b46f6a62d4d036f928a56705.png/s/f1200x/a/534336/sc/100"
+            id: 18,
+            name: 'Retro style handbag (2)',
+            price: 35.99,
+            oldPrice: 52.99,
+            isSale: true,
+            isNew: false,
+            categories: ['Women', 'Accessories'],
+            color: 'Brown',
+            image: 'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/c3d454c3b46f6a62d4d036f928a56705.png/s/f1200x/a/534336/sc/100',
         },
         {
-            "id": 5,
-            "name": "Warm casual sweater",
-            "price": 80.99,
-            "oldPrice": null,
-            "isSale": false,
-            "isNew": true,
-            "categories": [
-                "Women"
-            ],
-            "color": "Brown",
-            "image": "https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/ec9bc0e735f3c75eab9d4d8c4f8630fe.png/s/f1200x/a/534336/sc/400"
+            id: 5,
+            name: 'Warm casual sweater',
+            price: 80.99,
+            oldPrice: null,
+            isSale: false,
+            isNew: true,
+            categories: ['Women'],
+            color: 'Brown',
+            image: 'https://fs-thb03.getcourse.ru/fileservice/file/thumbnail/h/ec9bc0e735f3c75eab9d4d8c4f8630fe.png/s/f1200x/a/534336/sc/400',
         },
         {
-            "id": 13,
-            "name": "Textured turtleneck with zip (2)",
-            "price": 45.99,
-            "oldPrice": 53.99,
-            "isSale": true,
-            "isNew": false,
-            "categories": [
-                "Men"
-            ],
-            "color": "Brown",
-            "image": "https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/54cdbf69f8e60ba13e2e795cd495567f.png/s/f1200x/a/534336/sc/265"
+            id: 13,
+            name: 'Textured turtleneck with zip (2)',
+            price: 45.99,
+            oldPrice: 53.99,
+            isSale: true,
+            isNew: false,
+            categories: ['Men'],
+            color: 'Brown',
+            image: 'https://fs-thb01.getcourse.ru/fileservice/file/thumbnail/h/54cdbf69f8e60ba13e2e795cd495567f.png/s/f1200x/a/534336/sc/265',
         },
     ];
 
@@ -62,20 +63,20 @@ export function Sidebar({searchTerm, setSearchTerm, selectedCategory, changeSele
 
     function onClickColor(color) {
         const newSelectedColors = colorsSelection.includes(color)
-            ? colorsSelection.filter(item => item !== color)
+            ? colorsSelection.filter((item) => item !== color)
             : [...colorsSelection, color];
         setColorsSelection(newSelectedColors);
     }
 
     const applyFilters = () => {
         changeSelectedCategory(categorySelection);
-        setPrices({min: minPrice, max: maxPrice});
+        setPrices({ min: minPrice, max: maxPrice });
         changeSelectedColors(colorsSelection);
-    }
+    };
 
     return (
         <div className="sidebar">
-            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Categories
                 categories={categories}
                 categorySelection={categorySelection}
@@ -87,11 +88,7 @@ export function Sidebar({searchTerm, setSearchTerm, selectedCategory, changeSele
                 changeMinPrice={changeMinPrice}
                 changeMaxPrice={changeMaxPrice}
             />
-            <Colors
-                colors={colors}
-                colorsSelection={colorsSelection}
-                changeSelectedColors={onClickColor}
-            />
+            <Colors colors={colors} colorsSelection={colorsSelection} changeSelectedColors={onClickColor} />
             <div className="sidebar__item">
                 <div className="button-wrapper" onClick={() => applyFilters()}>
                     <button className="button">Apply Filter</button>
@@ -102,15 +99,17 @@ export function Sidebar({searchTerm, setSearchTerm, selectedCategory, changeSele
                 <div className="h4">Reviewed By You</div>
                 <div>
                     <div className="sidebar__reviewed-products">
-                        {reviewedProducts?.map((reviewedProduct) => (<ReviewedProduct key={reviewedProduct?.id} product={reviewedProduct}/>))}
+                        {reviewedProducts?.map((reviewedProduct) => (
+                            <ReviewedProduct key={reviewedProduct?.id} product={reviewedProduct} />
+                        ))}
                     </div>
                 </div>
             </div>
             <div>
                 <a href="#">
-                    <img src="/images/season-sale-banner.svg" alt="Season Sale Banner"/>
+                    <img src="/images/season-sale-banner.svg" alt="Season Sale Banner" />
                 </a>
             </div>
         </div>
-    )
+    );
 }
