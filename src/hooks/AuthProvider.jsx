@@ -19,6 +19,8 @@ export function AuthProvider({children}) {
         return saved ? JSON.parse(saved) : [];
     });
 
+    const [promoCode, setPromoCode] = useState('');
+
     useEffect(() => {
         localStorage.setItem(IS_AUTH, JSON.stringify(isAuth));
     }, [isAuth]);
@@ -70,6 +72,12 @@ export function AuthProvider({children}) {
         });
     }
 
+    const changePromoCode = (value) => {
+        if (value.trim() === 'ilovereact') {
+            setPromoCode(value);
+        }
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -78,7 +86,9 @@ export function AuthProvider({children}) {
                 chosenProducts,
                 orderedProducts,
                 changeChosenProducts,
-                changeOrderedProducts
+                changeOrderedProducts,
+                promoCode,
+                changePromoCode
             }}
         >
             {children}

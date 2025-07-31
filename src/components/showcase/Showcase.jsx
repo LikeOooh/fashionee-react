@@ -36,7 +36,6 @@ export function Showcase() {
             pages: Array.from({length: total}, (_, i) => i + 1),
         };
     }, [productsToView.length]);
-    console.log(currentPage);
 
     const filteredAndSortedProducts = useMemo(() => {
         const filtersApplied = {

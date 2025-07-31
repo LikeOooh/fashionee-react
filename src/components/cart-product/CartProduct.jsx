@@ -1,9 +1,11 @@
 import './CartProduct.scss'
+import {addWhitespaces} from "../../helpers/formatter.js";
 
 export function CartProduct({order, changeOrderedProducts}) {
     const product = order?.product;
     const count = order?.count;
     const totalPrice = (product?.price * order?.count).toFixed(2);
+    const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
 
     return (
         <div className="cart-product">
@@ -25,7 +27,7 @@ export function CartProduct({order, changeOrderedProducts}) {
                         </div>
                     </div>
                     <div className="cart-product__total-price">
-                        ${totalPrice}
+                        ${totalPriceAddWhitespaces}
                     </div>
                 </div>
                 <div className="cart-product__close">x</div>
