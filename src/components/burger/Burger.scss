@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .burger {
   cursor: pointer;
@@ -49,7 +49,7 @@
     transition: bottom .3s, transform .3s .15s;
   }
 
-  @media (max-width: $tablet-portrait) {
+  @media (max-width: v.$tablet-portrait) {
     &-checkbox:checked~.header__menu {
       display: block;
       position: absolute;

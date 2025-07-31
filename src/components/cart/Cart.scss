@@ -1,11 +1,11 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .cart {
   display: flex;
   justify-content: space-between;
   gap: 60px;
 
-  @media (max-width: $tablet-portrait) {
+  @media (max-width: v.$tablet-portrait) {
     padding: 40px;
     flex-direction: column;
     gap: 0;
@@ -20,7 +20,7 @@
     align-items: flex-start;
     margin-bottom: 40px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       flex-wrap: wrap;
       margin-bottom: 30px;
       gap: 20px;
@@ -36,7 +36,7 @@
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(0, 0, 0, 1);
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       gap: 20px;
     }
   }
@@ -51,7 +51,7 @@
     flex-direction: column;
     gap: 20px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       max-width: 720px;
     }
   }
@@ -94,7 +94,7 @@
     flex-direction: column;
     gap: 40px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       max-width: 720px;
       padding: 40px;
       justify-content: center;

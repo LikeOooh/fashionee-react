@@ -1,5 +1,5 @@
+@use './variables' as v;
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Raleway:wght@100..900&display=swap');
-@import 'variables';
 
 *, root, body {
   box-sizing: border-box;
@@ -49,7 +49,7 @@ html {
   width: 100%;
   margin: 0 auto;
 
-  @media (max-width: $tablet-landscape) {
+  @media (max-width: v.$tablet-landscape) {
     max-width: 840px;
   }
 }

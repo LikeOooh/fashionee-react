@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .product {
   max-width: 262px;
@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 20px;
 
-  @media (max-width: $tablet-portrait) {
+  @media (max-width: v.$tablet-portrait) {
     max-width: 200px;
   }
 
@@ -17,7 +17,7 @@
     & img {
       max-width: 262px;
 
-      @media (max-width: $tablet-portrait) {
+      @media (max-width: v.$tablet-portrait) {
         max-width: 200px;
       }
     }
@@ -32,7 +32,7 @@
     width: 100%;
     max-width: 222px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       max-width: 160px;
     }
   }

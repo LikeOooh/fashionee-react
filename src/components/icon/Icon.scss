@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .icon {
   height: 20px;
@@ -46,7 +46,7 @@
     top: 30px;
     left: 30px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       display: none;
     }
   }
@@ -59,7 +59,7 @@
     top: 85px;
     right: 30px;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       display: none;
     }
   }

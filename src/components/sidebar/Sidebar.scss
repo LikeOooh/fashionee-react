@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .sidebar {
   max-width: 242px;
@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 50px;
 
-  @media (max-width: $mobile-large) {
+  @media (max-width: v.$mobile-large) {
     display: none;
   }
 

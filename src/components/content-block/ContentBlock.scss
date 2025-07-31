@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .content-block {
   max-width: 100%;
@@ -32,7 +32,7 @@
     margin-left: 390px;
     color: rgba(0, 0, 0, 1);
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       margin-left: 60px;
     }
   }
@@ -44,7 +44,7 @@
     display: flex;
     align-items: center;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       margin-left: 60px;
     }
   }
@@ -70,7 +70,7 @@
     height: 400px;
     background-color: rgba(241, 242, 243, 1);
 
-    @media (max-width: $tablet-landscape) {
+    @media (max-width: v.$tablet-landscape) {
       display: none;
     }
   }

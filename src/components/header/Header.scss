@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .header {
   max-width: 1800px;
@@ -12,11 +12,11 @@
     align-items: center;
     position: relative;
 
-    @media (max-width: $tablet-landscape) {
+    @media (max-width: v.$tablet-landscape) {
       gap: 30px;
     }
 
-    @media (max-width: $mobile-large) {
+    @media (max-width: v.$mobile-large) {
       gap: 15px;
     }
   }
@@ -26,15 +26,15 @@
     flex-direction: row;
     gap: 40px;
 
-    @media (max-width: $tablet-landscape) {
+    @media (max-width: v.$tablet-landscape) {
       gap: 20px;
     }
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       display: none;
     }
 
-    @media (max-width: $mobile-large) {
+    @media (max-width: v.$mobile-large) {
       gap: 15px;
     }
   }
@@ -44,11 +44,11 @@
     align-items: center;
     gap: 40px;
 
-    @media (max-width: $tablet-landscape) {
+    @media (max-width: v.$tablet-landscape) {
       gap: 30px;
     }
 
-    @media (max-width: $mobile-large) {
+    @media (max-width: v.$mobile-large) {
       gap: 15px;
     }
   }
@@ -63,7 +63,7 @@
     align-items: center;
     cursor: pointer;
 
-    @media (max-width: $tablet-portrait-large) {
+    @media (max-width: v.$tablet-portrait-large) {
       display: none;
     }
   }

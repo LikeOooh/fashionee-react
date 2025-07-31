@@ -1,10 +1,10 @@
-@import '../../variables';
+@use '../../variables' as v;
 
 .footer {
   border-top: 20px solid rgba(238, 238, 238, 1);
   position: relative;
 
-  @media (max-width: $tablet-portrait) {
+  @media (max-width: v.$tablet-portrait) {
     padding: 40px;
   }
 
@@ -12,7 +12,7 @@
     margin: 110px 0 90px 0;
     display: flex;
 
-    @media (max-width: $tablet-portrait) {
+    @media (max-width: v.$tablet-portrait) {
       flex-wrap: wrap;
       gap: 50px;
       justify-content: flex-start;
@@ -28,7 +28,7 @@
       max-width: 331px;
       margin: 0 60px 0 0;
 
-      @media (max-width: $tablet-portrait) {
+      @media (max-width: v.$tablet-portrait) {
         margin: 0 40px 30px 0;
         max-width: 335px;
         width: 100%;
@@ -41,7 +41,7 @@
       flex-direction: column;
       gap: 20px;
 
-      @media (max-width: $tablet-portrait) {
+      @media (max-width: v.$tablet-portrait) {
         margin: 0 40px 30px 0;
       }
     }
@@ -64,7 +64,7 @@
     &-column.column-4 {
       max-width: 361px;
 
-      @media (max-width: $tablet-portrait) {
+      @media (max-width: v.$tablet-portrait) {
         max-width: 335px;
         width: 100%;
       }
@@ -94,7 +94,7 @@
     border-top: 1px solid rgba(68, 68, 68, 20%);
     padding-top: 23px;
 
-    @media (max-width: $mobile-large) {
+    @media (max-width: v.$mobile-large) {
       flex-direction: column;
     }
   }
