@@ -5,14 +5,17 @@ import {addWhitespaces} from "../../helpers/formatter.js";
 export function CartOrder({totalPrice, promoCode}) {
     const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
     const deliveryValue = totalPrice !== 0 ? 15 : 0;
-    const totalOrderPrice = addWhitespaces((totalPrice * 0.9 + deliveryValue).toFixed(2));
+    const totalOrderPrice = promoCode
+        ? addWhitespaces((totalPrice * 0.9 + deliveryValue).toFixed(2))
+        : addWhitespaces((totalPrice + deliveryValue).toFixed(2));
 
     return (
         <div className="cart-order">
             <div className="title">Your Order</div>
             <div className="cart-order__price-wrapper">
                 <CartPriceRow type="price" rowName="Order price" value={totalPriceAddWhitespaces} info=""/>
-                <CartPriceRow type="promoCode" rowName="Discount for promo code" value={promoCode ? "10%" : "No"} info=""/>
+                <CartPriceRow type="promoCode" rowName="Discount for promo code" value={promoCode ? "10%" : "No"}
+                              info=""/>
                 {deliveryValue !== 0 && <CartPriceRow type="delivery" rowName="Delivery" value={deliveryValue}
                                                       info="(Aug 02 at 16:00)"/>}
                 <CartPriceRow type="total" rowName="Total" value={totalOrderPrice} info=""/>
