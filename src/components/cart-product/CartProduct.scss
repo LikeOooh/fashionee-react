@@ -66,6 +66,10 @@
     @media (max-width: v.$tablet-portrait) {
       gap: 20px;
     }
+
+    @media (max-width: v.$mobile-small) {
+      justify-content: flex-start;
+    }
   }
 
   &__quantity {
@@ -119,6 +123,10 @@
     line-height: 16px;
     font-family: "Josefin Sans", serif;
     text-decoration: line-through;
+
+    @media (max-width: v.$mobile-small) {
+      display: none;
+    }
   }
 
   &__close {
