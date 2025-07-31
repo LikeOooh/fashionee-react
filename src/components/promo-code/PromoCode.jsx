@@ -13,8 +13,7 @@ export function PromoCode() {
             <div className="promo-code__info">
                 <div className="title">You Have A Promo Code?</div>
                 <div className="promo-code__description">To receive up-to-date promotional codes, subscribe to us
-                    on
-                    social networks.
+                    on social networks.
                 </div>
             </div>
             <div className="promo-code">
