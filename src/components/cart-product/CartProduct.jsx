@@ -4,8 +4,10 @@ import { addWhitespaces } from '../../helpers/formatter.js';
 export function CartProduct({ order, changeOrderedProducts }) {
     const product = order?.product;
     const count = order?.count;
-    const totalPrice = (product?.price * order?.count).toFixed(2);
+    const totalPrice = product?.price * order?.count;
     const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
+    const priceAddWhitespaces = addWhitespaces(product?.price);
+    const oldPriceAddWhitespaces = addWhitespaces(product?.oldPrice);
 
     return (
         <div className="cart-product">
@@ -19,8 +21,10 @@ export function CartProduct({ order, changeOrderedProducts }) {
                 <div className="cart-product__price-wrapper">
                     <div className="cart-product__price-and-quantity">
                         <div className="cart-product__price">
-                            {product?.oldPrice && <div className="cart-product__old-price">${product?.oldPrice}</div>}
-                            <div className="cart-product__current-price">${product?.price}</div>
+                            {product?.oldPrice && (
+                                <div className="cart-product__old-price">{oldPriceAddWhitespaces}</div>
+                            )}
+                            <div className="cart-product__current-price">{priceAddWhitespaces}</div>
                         </div>
                         <div className="cart-product__quantity">
                             <div
@@ -38,7 +42,7 @@ export function CartProduct({ order, changeOrderedProducts }) {
                             </div>
                         </div>
                     </div>
-                    <div className="cart-product__total-price">${totalPriceAddWhitespaces}</div>
+                    <div className="cart-product__total-price">{totalPriceAddWhitespaces}</div>
                 </div>
                 <div className="cart-product__close">x</div>
             </div>

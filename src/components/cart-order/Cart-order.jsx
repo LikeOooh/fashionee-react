@@ -3,11 +3,12 @@ import { CartPriceRow } from '../cart-price-row/CartPriceRow.jsx';
 import { addWhitespaces } from '../../helpers/formatter.js';
 
 export function CartOrder({ totalPrice, promoCode }) {
-    const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
     const deliveryValue = totalPrice !== 0 ? 15 : 0;
     const totalOrderPrice = promoCode
-        ? addWhitespaces((totalPrice * 0.9 + deliveryValue).toFixed(2))
-        : addWhitespaces((totalPrice + deliveryValue).toFixed(2));
+        ? addWhitespaces(totalPrice * 0.9 + deliveryValue)
+        : addWhitespaces(totalPrice + deliveryValue);
+    const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
+    const deliveryValueAddWhitespaces = addWhitespaces(deliveryValue);
 
     return (
         <div className="cart-order">
@@ -21,7 +22,12 @@ export function CartOrder({ totalPrice, promoCode }) {
                     info=""
                 />
                 {deliveryValue !== 0 && (
-                    <CartPriceRow type="delivery" rowName="Delivery" value={deliveryValue} info="(Aug 02 at 16:00)" />
+                    <CartPriceRow
+                        type="delivery"
+                        rowName="Delivery"
+                        value={deliveryValueAddWhitespaces}
+                        info="(Aug 02 at 16:00)"
+                    />
                 )}
                 <CartPriceRow type="total" rowName="Total" value={totalOrderPrice} info="" />
             </div>

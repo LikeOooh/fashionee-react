@@ -16,16 +16,16 @@ export function Header({ pageName, setPageName }) {
                 <Burger />
                 <Logo />
                 <div className="header__menu">
-                    <MenuItem title="Home" icon={false} isAactive={pageName === 'home'} />
-                    <MenuItem title="Pages" icon={true} isAactive={pageName === 'pages'} />
+                    <MenuItem title="Home" icon={false} isActive={pageName === 'home'} />
+                    <MenuItem title="Pages" icon={true} isActive={pageName === 'pages'} />
                     <MenuItem
                         title="Shop"
                         icon={true}
                         onClick={() => setPageName('Shop')}
-                        isAactive={pageName === 'Shop'}
+                        isActive={pageName === 'Shop'}
                     />
-                    <MenuItem title="Blog" icon={false} isAactive={pageName === 'blog'} />
-                    <MenuItem title="Contact" icon={false} isAactive={pageName === 'contact'} />
+                    <MenuItem title="Blog" icon={false} isActive={pageName === 'blog'} />
+                    <MenuItem title="Contact" icon={false} isActive={pageName === 'contact'} />
                 </div>
             </div>
             <div className="header__right-side">

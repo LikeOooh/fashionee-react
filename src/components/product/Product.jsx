@@ -2,6 +2,7 @@ import './Product.scss';
 import { AuthContext } from '../../hooks/AuthContext';
 import { Icon } from '../icon/Icon.jsx';
 import { useContext } from 'react';
+import { addWhitespaces } from '../../helpers/formatter.js';
 
 export function Product({ product }) {
     const { chosenProducts, orderedProducts, changeChosenProducts, changeOrderedProducts } = useContext(AuthContext);
@@ -9,6 +10,8 @@ export function Product({ product }) {
     const orderedItem = orderedProducts.find((item) => item.product?.id === product.id);
     const isOrdered = !!orderedItem;
     const orderedCount = orderedItem?.count || 0;
+    const priceAddWhitespaces = addWhitespaces(product?.price);
+    const oldPriceAddWhitespaces = addWhitespaces(product?.oldPrice);
 
     return (
         <div className="product">
@@ -27,8 +30,8 @@ export function Product({ product }) {
             <div className="product__info">
                 <div className="product__name">{product?.name}</div>
                 <div className="product__price">
-                    <div className="product__current-price">${product?.price}</div>
-                    {product?.oldPrice && <div className="product__old-price">${product?.oldPrice}</div>}
+                    <div className="product__current-price">{priceAddWhitespaces}</div>
+                    {product?.oldPrice && <div className="product__old-price">{oldPriceAddWhitespaces}</div>}
                 </div>
             </div>
             {isOrdered ? (
