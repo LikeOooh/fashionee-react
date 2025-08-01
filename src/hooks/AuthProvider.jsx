@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import {AuthContext} from "./AuthContext.jsx";
-import {IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS} from "../constants/localStorage.js";
+import { useEffect, useState } from 'react';
+import { AuthContext } from './AuthContext.jsx';
+import { IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS } from '../constants/localStorage.js';
 
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
     //localStorage.clear();
     const [isAuth, setIsAuth] = useState(() => {
         const saved = localStorage.getItem(IS_AUTH);
@@ -26,43 +26,43 @@ export function AuthProvider({children}) {
     }, [isAuth]);
 
     const changeChosenProducts = (productId) => {
-        setChosenProducts(chosenProducts => {
+        setChosenProducts((chosenProducts) => {
             const isProductSelected = chosenProducts.includes(productId);
             const newChosenProducts = isProductSelected
-                ? chosenProducts.filter(item => item !== productId)
-                : [...chosenProducts, productId]
+                ? chosenProducts.filter((item) => item !== productId)
+                : [...chosenProducts, productId];
             localStorage.setItem(CHOSEN_PRODUCTS, JSON.stringify(newChosenProducts));
             return newChosenProducts;
         });
-    }
+    };
 
     const changeOrderedProducts = (product, action) => {
         if (!product || !product.id || typeof product.price !== 'number') {
             console.error('Invalid product data');
             return;
         }
-        setOrderedProducts(orderedProducts => {
+        setOrderedProducts((orderedProducts) => {
             const newOrderedProducts = [...orderedProducts];
-            const productIndex = orderedProducts.findIndex(p => p.product?.id === product.id);
-            if (action === "increase") {
+            const productIndex = orderedProducts.findIndex((p) => p.product?.id === product.id);
+            if (action === 'increase') {
                 if (productIndex >= 0) {
                     newOrderedProducts[productIndex] = {
                         ...newOrderedProducts[productIndex],
                         count: newOrderedProducts[productIndex].count + 1,
-                        totalPrice: product.price * (newOrderedProducts[productIndex].count + 1)
+                        totalPrice: product.price * (newOrderedProducts[productIndex].count + 1),
                     };
                 } else {
-                    newOrderedProducts.push({product: product, count: 1, totalPrice: product.price});
+                    newOrderedProducts.push({ product: product, count: 1, totalPrice: product.price });
                 }
             }
-            if (action === "decrease" && productIndex >= 0) {
+            if (action === 'decrease' && productIndex >= 0) {
                 const updatedCount = newOrderedProducts[productIndex].count - 1;
                 if (updatedCount > 0) {
                     newOrderedProducts[productIndex] = {
                         ...newOrderedProducts[productIndex],
                         count: updatedCount,
-                        totalPrice: product.price * updatedCount
-                    }
+                        totalPrice: product.price * updatedCount,
+                    };
                 } else {
                     newOrderedProducts.splice(productIndex, 1);
                 }
@@ -70,13 +70,13 @@ export function AuthProvider({children}) {
             localStorage.setItem(ORDERED_PRODUCTS, JSON.stringify(newOrderedProducts));
             return newOrderedProducts;
         });
-    }
+    };
 
     const changePromoCode = (value) => {
         if (value.trim() === 'ilovereact') {
             setPromoCode(value);
         }
-    }
+    };
 
     return (
         <AuthContext.Provider
@@ -88,7 +88,7 @@ export function AuthProvider({children}) {
                 changeChosenProducts,
                 changeOrderedProducts,
                 promoCode,
-                changePromoCode
+                changePromoCode,
             }}
         >
             {children}
