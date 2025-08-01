@@ -107,7 +107,7 @@ export function Sidebar({
             </div>
             <div>
                 <a href="#">
-                    <img src="/images/season-sale-banner.svg" alt="Season Sale Banner" />
+                    <img src="../../../public/images/season-sale-banner.svg" alt="Season Sale Banner" />
                 </a>
             </div>
         </div>
