@@ -150,7 +150,7 @@ export const changeChosenProducts = (productId, setChosenProducts) => {
 /**
  * Изменяет количество товара в списке заказанных товаров
  * @param {Object} product - Объект товара (обязательные поля: id, price)
- * @param {'increase'|'decrease'} action - Действие: увеличить/уменьшить количество
+ * @param {string} action - Действие: увеличить/уменьшить количество
  * @param {Function} setOrderedProducts - Функция-сеттер состояния заказанных товаров (из useContext)
  * @returns {void} Обновляет состояние orderedProducts
  * @example
@@ -165,6 +165,11 @@ export const changeOrderedProducts = (product, action, setOrderedProducts) => {
     setOrderedProducts((orderedProducts) => {
         const newOrderedProducts = [...orderedProducts];
         const productIndex = orderedProducts.findIndex((p) => p.product?.id === product.id);
+        if (action === 'delete') {
+            if (productIndex >= 0) {
+                newOrderedProducts.splice(productIndex, 1);
+            }
+        }
         if (action === 'increase') {
             if (productIndex >= 0) {
                 newOrderedProducts[productIndex] = {

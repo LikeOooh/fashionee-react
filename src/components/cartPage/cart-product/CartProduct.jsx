@@ -4,11 +4,11 @@ import { changeOrderedProducts } from '@/helpers/products.js';
 import { useContext } from 'react';
 import './CartProduct.scss';
 
-export function CartProduct({ order }) {
+export function CartProduct({ orderedProduct }) {
     const { setOrderedProducts } = useContext(AuthContext);
-    const product = order?.product;
-    const count = order?.count;
-    const totalPrice = product?.price * order?.count;
+    const product = orderedProduct?.product;
+    const count = orderedProduct?.count;
+    const totalPrice = product?.price * orderedProduct?.count;
     const totalPriceAddWhitespaces = addWhitespaces(totalPrice);
     const priceAddWhitespaces = addWhitespaces(product?.price);
     const oldPriceAddWhitespaces = addWhitespaces(product?.oldPrice);
@@ -48,7 +48,12 @@ export function CartProduct({ order }) {
                     </div>
                     <div className="cart-product__total-price">{totalPriceAddWhitespaces}</div>
                 </div>
-                <div className="cart-product__close">x</div>
+                <div
+                    className="cart-product__delete"
+                    onClick={() => changeOrderedProducts(product, 'delete', setOrderedProducts)}
+                >
+                    x
+                </div>
             </div>
         </div>
     );

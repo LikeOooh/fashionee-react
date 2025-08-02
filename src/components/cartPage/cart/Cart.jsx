@@ -19,7 +19,7 @@ export function Cart() {
                 <div className="cart__order-wrapper">
                     <div className="cart__product-list">
                         {orderedProducts?.map((orderedProduct) => (
-                            <CartProduct key={orderedProduct?.product?.id} order={orderedProduct} />
+                            <CartProduct key={orderedProduct?.product?.id} orderedProduct={orderedProduct} />
                         ))}
                     </div>
                     <PromoCode />
