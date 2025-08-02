@@ -1,5 +1,7 @@
+import { PROMO_CODES } from '@/constants/promoCodes.js';
+
 export const changePromoCode = (value, setPromoCode) => {
-    if (value.trim() === 'ilovereact') {
+    if (PROMO_CODES.include(value.trim())) {
         setPromoCode(value);
     }
 };

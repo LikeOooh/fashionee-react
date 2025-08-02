@@ -1,0 +1,90 @@
+@use '@/styles/variables' as v;
+
+.icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+
+  &_xsmall {
+    width: 14px;
+    height: 14px;
+  }
+
+  &_small {
+    width: 16px;
+    height: 16px;
+  }
+
+  &_medium {
+    width: 20px;
+    height: 20px;
+  }
+
+  &_large {
+    width: 24px;
+    height: 24px;
+  }
+
+  &_logo {
+    width: 111px;
+    height: 17px;
+  }
+
+  &_vector-object-354 {
+    position: absolute;
+    z-index: -1;
+    width: 354px;
+    height: 322px;
+    left: 60px;
+  }
+
+  &_vector-object-130 {
+    position: absolute;
+    z-index: -1;
+    width: 130px;
+    height: 130px;
+    top: 30px;
+    left: 30px;
+
+    @media (max-width: v.$tablet-portrait) {
+      display: none;
+    }
+  }
+
+  &_vector-object-290 {
+    position: absolute;
+    z-index: -1;
+    width: 290px;
+    height: 290px;
+    top: 85px;
+    right: 30px;
+
+    @media (max-width: v.$tablet-portrait) {
+      display: none;
+    }
+  }
+
+  &_pagin-arrow {
+    width: 51px;
+    height: 12px;
+  }
+
+  &_payment-method {
+    height: 20px;
+    width: 34px;
+  }
+
+  &_search {
+    width: 18px;
+    height: 18px;
+  }
+
+  &_send {
+    position: absolute;
+    right: 0;
+  }
+
+  &_hover {
+    display: none;
+  }
+}

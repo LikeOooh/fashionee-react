@@ -1,0 +1,99 @@
+@use '@/styles/variables' as v;
+
+.content-block {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 150px;
+  margin-top: 50px;
+  margin-bottom: 199px;
+  padding-right: 120px;
+
+
+  @media (max-width: v.$tablet-portrait) {
+    margin-bottom: 40px;
+  }
+
+  &__site-description {
+    box-sizing: border-box;
+    margin-top: 32px;
+    position: relative;
+    max-width: 850px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__wrapper {
+    height: 100%;
+  }
+
+  &__site-name {
+    font-family: "Josefin Sans", serif;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 80px;
+    margin-top: 111px;
+    margin-left: 390px;
+    color: rgba(0, 0, 0, 1);
+
+    @media (max-width: v.$tablet-portrait) {
+      margin-left: 60px;
+    }
+  }
+
+  &__breadcrumbs {
+    margin-top: 21px;
+    margin-left: 390px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: v.$tablet-portrait) {
+      margin-left: 60px;
+    }
+  }
+
+  &__crumb-list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style-type: none;
+  }
+
+  &__horizontal-line {
+    height: 2px;
+    max-width: 850px;
+    background-color: rgba(0, 0, 0, 1);
+    margin-top: 21px;
+    margin-bottom: 64px;
+  }
+
+  &__site-image {
+    max-width: 800px;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(241, 242, 243, 1);
+
+    @media (max-width: v.$tablet-landscape) {
+      display: none;
+    }
+  }
+
+  &__crumb {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
+
+    &-vertical-line {
+      height: 15px;
+      width: 1.5px;
+      background-color: rgba(0, 0, 0, 1);
+    }
+
+    &.active {
+      color: rgba(255, 142, 142, 1);
+    }
+  }
+}

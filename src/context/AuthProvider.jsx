@@ -1,6 +1,6 @@
 import { AuthContext } from './AuthContext.jsx';
-import { IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS, PROMO_CODE } from '../constants/localStorage.js';
-import { useLocalStorage } from '../hooks/useLocalStorage.jsx';
+import { IS_AUTH, CHOSEN_PRODUCTS, ORDERED_PRODUCTS, PROMO_CODE } from '@/constants/localStorage.js';
+import { useLocalStorage } from '@/hooks/useLocalStorage.jsx';
 
 export function AuthProvider({ children }) {
     const [isAuth, setIsAuth] = useLocalStorage(IS_AUTH, false);

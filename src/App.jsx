@@ -1,8 +1,8 @@
-import { Header } from './components/header/Header.jsx';
-import { ContentBlock } from './components/content-block/ContentBlock.jsx';
-import { Footer } from './components/footer/Footer.jsx';
-import { Showcase } from './components/showcase/Showcase.jsx';
-import { Cart } from './components/cart/Cart.jsx';
+import { Header } from './components/layout/header/Header.jsx';
+import { ContentBlock } from './components/layout/content-block/ContentBlock.jsx';
+import { Footer } from './components/layout/footer/Footer.jsx';
+import { Showcase } from './components/shopPage/showcase/Showcase.jsx';
+import { Cart } from './components/cartPage/cart/Cart.jsx';
 import { AuthProvider } from './context/AuthProvider.jsx';
 import { useEffect, useState } from 'react';
 

@@ -1,0 +1,39 @@
+.select-item {
+  cursor: pointer;
+  position: relative;
+  box-sizing: content-box;
+
+  &__name {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid rgba(238, 238, 238, 1);
+      margin-right: 15px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      box-sizing: border-box;
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+
+    &.checked + .select-item__name {
+      color: rgba(255, 142, 142, 1);
+
+      &::before {
+        background-image: url("../../../assets/icons/check-pink.svg");
+      }
+    }
+  }
+}

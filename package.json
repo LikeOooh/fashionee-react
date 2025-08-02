@@ -2,6 +2,9 @@
   "name": "fashionee",
   "private": true,
   "version": "0.0.0",
+  "imports": {
+    "@": "./src/*"
+  },
   "homepage": "https://likeoooh.github.io/fashionee-react/",
   "type": "module",
   "scripts": {

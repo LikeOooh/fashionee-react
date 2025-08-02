@@ -1,0 +1,43 @@
+@use '@/styles/variables' as v;
+
+.showcase {
+  display: flex;
+  gap: 50px;
+
+  @media (max-width: v.$tablet-landscape) {
+    gap: 20px;
+    margin: 0 10px;
+  }
+
+  &__products-wrapper {
+    max-width: 846px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    @media (max-width: v.$tablet-landscape) {
+      max-width: 564px;
+    }
+
+    @media (max-width: v.$mobile-large) {
+      align-items: center;
+    }
+  }
+
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 30px;
+
+    @media (max-width: v.$tablet-portrait) {
+      justify-content: space-evenly;
+      gap: 10px;
+    }
+
+    @media (max-width: v.$mobile-small) {
+      display: block;
+    }
+  }
+}
