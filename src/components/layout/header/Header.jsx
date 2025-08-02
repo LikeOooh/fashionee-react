@@ -1,9 +1,9 @@
-import { AuthContext } from '@/context/AuthContext.jsx';
-import { useContext } from 'react';
 import { MenuItem } from '@/components/ui/menu-item/MenuItem.jsx';
 import { Logo } from '@/components/ui/logo/Logo.jsx';
 import { Icon } from '@/components/ui/icon/Icon.jsx';
 import { Burger } from '@/components/ui/burger/Burger.jsx';
+import { AuthContext } from '@/context/AuthContext.jsx';
+import { useContext } from 'react';
 import './Header.scss';
 
 export function Header({ pageName, setPageName }) {

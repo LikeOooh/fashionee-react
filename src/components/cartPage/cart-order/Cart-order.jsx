@@ -2,7 +2,7 @@ import { addWhitespaces } from '@/helpers/formatter.js';
 import { CartPriceRow } from '@/components/cartPage/cart-price-row/CartPriceRow.jsx';
 import './Cart-order.scss';
 
-export function CartOrder({ totalPrice, promoCode }) {
+export function CartOrder({ totalPrice, promoCode, handleCheckout }) {
     const discountValue = addWhitespaces(totalPrice * 0.1);
     const deliveryValue = totalPrice !== 0 ? 15 : 0;
     const totalOrderPrice = promoCode
@@ -33,7 +33,9 @@ export function CartOrder({ totalPrice, promoCode }) {
                 <CartPriceRow type="total" rowName="Total" value={totalOrderPrice} info="" />
             </div>
             <div className="button-wrapper cart-order__button-wrapper">
-                <button className="button">Checkout</button>
+                <button className="button" onClick={handleCheckout}>
+                    Checkout
+                </button>
                 <div className="vertical-line"></div>
             </div>
         </div>

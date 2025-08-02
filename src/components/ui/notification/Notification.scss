@@ -1,0 +1,17 @@
+.notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  padding: 20px 30px;
+  background-color: rgb(85, 154, 78);
+  color: white;
+  font-size: 24px;
+  border-radius: 16px;
+  z-index: 10;
+  animation:
+          fadeIn 0.5s cubic-bezier(0.21, 0.61, 0.35, 1) forwards,
+          slideUp 0.5s cubic-bezier(0.21, 0.61, 0.35, 1) forwards;
+  transition:
+          opacity 0.5s ease-out,
+          transform 0.5s ease-out;
+}

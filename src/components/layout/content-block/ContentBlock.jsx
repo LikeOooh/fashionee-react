@@ -1,7 +1,9 @@
 import { Icon } from '@/components/ui/icon/Icon.jsx';
 import './ContentBlock.scss';
 
-export function ContentBlock({ pageName, setPageName, pageNames }) {
+export function ContentBlock({ pageName, setPageName }) {
+    const pageNames = ['Cart', 'Shop'];
+
     return (
         <div className="content-block">
             <div className="content-block__site-description">
