@@ -3,7 +3,7 @@ import { MenuItem } from '../menu-item/MenuItem.jsx';
 import { Logo } from '../logo/Logo.jsx';
 import { Icon } from '../icon/Icon.jsx';
 import { Burger } from '../burger/Burger.jsx';
-import { AuthContext } from '../../hooks/AuthContext';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { useContext } from 'react';
 
 export function Header({ pageName, setPageName }) {
@@ -29,7 +29,7 @@ export function Header({ pageName, setPageName }) {
                 </div>
             </div>
             <div className="header__right-side">
-                {isAuth && 'Вы авторизованы'}
+                {isAuth && <span className="header__auth">Вы авторизованы</span>}
                 <button className="header__auth-button" onClick={() => setIsAuth(!isAuth)}>
                     {isAuth ? 'Выйти' : 'Войти'}
                 </button>

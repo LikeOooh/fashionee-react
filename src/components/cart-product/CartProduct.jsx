@@ -1,7 +1,11 @@
 import './CartProduct.scss';
 import { addWhitespaces } from '../../helpers/formatter.js';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import { changeOrderedProducts } from '../../helpers/products.js';
 
-export function CartProduct({ order, changeOrderedProducts }) {
+export function CartProduct({ order }) {
+    const { setOrderedProducts } = useContext(AuthContext);
     const product = order?.product;
     const count = order?.count;
     const totalPrice = product?.price * order?.count;
@@ -29,14 +33,14 @@ export function CartProduct({ order, changeOrderedProducts }) {
                         <div className="cart-product__quantity">
                             <div
                                 className="cart-product__count-button"
-                                onClick={() => changeOrderedProducts(product, 'decrease')}
+                                onClick={() => changeOrderedProducts(product, 'decrease', setOrderedProducts)}
                             >
                                 -
                             </div>
                             <div className="count">{count}</div>
                             <div
                                 className="cart-product__count-button"
-                                onClick={() => changeOrderedProducts(product, 'increase')}
+                                onClick={() => changeOrderedProducts(product, 'increase', setOrderedProducts)}
                             >
                                 +
                             </div>

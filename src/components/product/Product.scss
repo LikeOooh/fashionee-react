@@ -11,6 +11,10 @@
     max-width: 200px;
   }
 
+  @media (max-width: v.$mobile-large) {
+    max-width: 262px;
+  }
+
   &__photo {
     position: relative;
 
@@ -19,6 +23,10 @@
 
       @media (max-width: v.$tablet-portrait) {
         max-width: 200px;
+      }
+
+      @media (max-width: v.$mobile-large) {
+        max-width: 262px;
       }
     }
   }

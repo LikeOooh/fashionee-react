@@ -6,6 +6,10 @@
   display: flex;
   justify-content: space-between;
 
+  @media (max-width: v.$tablet-landscape) {
+    margin: 50px 10px 0 10px;
+  }
+
   &__left-side {
     display: flex;
     gap: 65px;
@@ -50,6 +54,12 @@
 
     @media (max-width: v.$mobile-large) {
       gap: 15px;
+    }
+  }
+
+  &__auth {
+    @media (max-width: v.$tablet-portrait-large) {
+      display: none;
     }
   }
 

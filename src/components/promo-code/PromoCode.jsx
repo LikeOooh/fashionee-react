@@ -1,11 +1,12 @@
 import './PromoCode.scss';
 import { Icon } from '../icon/Icon.jsx';
 import { useContext, useState } from 'react';
-import { AuthContext } from '../../hooks/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import { changePromoCode } from '../../helpers/promoCode.js';
 
 export function PromoCode() {
     const [inputPromoCode, setInputPromoCode] = useState('');
-    const { promoCode, changePromoCode } = useContext(AuthContext);
+    const { promoCode, setPromoCode } = useContext(AuthContext);
     const info = 'Промокод применен. Скидка - 10%!';
 
     return (
@@ -26,7 +27,10 @@ export function PromoCode() {
                     onChange={(e) => setInputPromoCode(e.target.value)}
                 />
                 <div className="button-wrapper promo-code-button-wrapper">
-                    <button className="button promo-code-button" onClick={() => changePromoCode(inputPromoCode)}>
+                    <button
+                        className="button promo-code-button"
+                        onClick={() => changePromoCode(inputPromoCode, setPromoCode)}
+                    >
                         <Icon name="arrow" className="icon_medium" />
                     </button>
                     <div className="vertical-line"></div>

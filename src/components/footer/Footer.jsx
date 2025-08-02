@@ -15,22 +15,22 @@ export function Footer() {
                 <Icon name="vector-object-290" className="icon_vector-object-290" />
 
                 <div className="footer__info">
-                    <div className="footer__info-column column-1">
+                    <div className="footer__column column-1">
                         <Logo />
                         <div className="about-brand">
                             Cillum eu id enim aliquip aute ullamco anim. Culpa deserunt nostrud excepteur voluptate.
                         </div>
                         <FindUs />
                     </div>
-                    <div className="footer__info-column column-2">
+                    <div className="footer__column column-2">
                         <div className="title h5">About</div>
                         <CustomList custList={about} />
                     </div>
-                    <div className="footer__info-column column-3">
+                    <div className="footer__column column-3">
                         <div className="title h5">Useful links</div>
                         <CustomList custList={usefulLinks} onClick />
                     </div>
-                    <div className="footer__info-column column-4">
+                    <div className="footer__column column-4">
                         <div className="title h5">Newsletter</div>
                         <div className="newsletter-text">
                             Subscribe to be the first to hear about deals, offers and upcoming collections.

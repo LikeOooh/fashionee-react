@@ -3,6 +3,7 @@ import { CartPriceRow } from '../cart-price-row/CartPriceRow.jsx';
 import { addWhitespaces } from '../../helpers/formatter.js';
 
 export function CartOrder({ totalPrice, promoCode }) {
+    const discountValue = addWhitespaces(totalPrice * 0.1);
     const deliveryValue = totalPrice !== 0 ? 15 : 0;
     const totalOrderPrice = promoCode
         ? addWhitespaces(totalPrice * 0.9 + deliveryValue)
@@ -18,7 +19,7 @@ export function CartOrder({ totalPrice, promoCode }) {
                 <CartPriceRow
                     type="promoCode"
                     rowName="Discount for promo code"
-                    value={promoCode ? '10%' : 'No'}
+                    value={promoCode ? discountValue : 'No'}
                     info=""
                 />
                 {deliveryValue !== 0 && (

@@ -1,7 +1,7 @@
 import './Sidebar.scss';
 import { useState } from 'react';
 import { ReviewedProduct } from '../reviewed-product/ReviewedProduct.jsx';
-import { filters } from '../../helpers/products.js';
+import { getFilters } from '../../helpers/products.js';
 import { Categories } from '../categories/Categories.jsx';
 import { Price } from '../price/Price.jsx';
 import { Colors } from '../colors/Colors.jsx';
@@ -16,10 +16,10 @@ export function Sidebar({
     selectedColors,
     changeSelectedColors,
 }) {
-    const categories = ['All', ...filters().categories];
-    const colors = [...filters().colors];
+    const categories = ['All', ...getFilters().categories];
+    const colors = [...getFilters().colors];
     const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(Math.round(filters().prices.max) || 0);
+    const [maxPrice, setMaxPrice] = useState(Math.round(getFilters().prices.max) || 0);
     const [categorySelection, setCategorySelection] = useState(selectedCategory);
     const [colorsSelection, setColorsSelection] = useState(selectedColors);
     const reviewedProducts = [

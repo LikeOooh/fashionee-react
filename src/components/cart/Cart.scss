@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   gap: 60px;
+  width: 100%;
 
   @media (max-width: v.$tablet-portrait) {
     padding: 40px;

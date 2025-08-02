@@ -5,12 +5,12 @@ import { Product } from '../product/Product.jsx';
 import { Sidebar } from '../sidebar/Sidebar.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '../../hooks/useDebounce.jsx';
-import { filterProducts, filters } from '../../helpers/products.js';
+import { filterProducts, getFilters } from '../../helpers/products.js';
 import { sortProducts } from '../../helpers/sort.js';
 import { Sort } from '../sort/Sort.jsx';
 import { Pagination } from '../pagination/Pagination.jsx';
 
-const initialFilters = filters();
+const initialFilters = getFilters();
 const productsPerPage = 12;
 
 export function Showcase() {

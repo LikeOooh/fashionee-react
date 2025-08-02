@@ -1,11 +1,12 @@
 import './Product.scss';
-import { AuthContext } from '../../hooks/AuthContext';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { Icon } from '../icon/Icon.jsx';
 import { useContext } from 'react';
 import { addWhitespaces } from '../../helpers/formatter.js';
+import { changeChosenProducts, changeOrderedProducts } from '../../helpers/products.js';
 
 export function Product({ product }) {
-    const { chosenProducts, orderedProducts, changeChosenProducts, changeOrderedProducts } = useContext(AuthContext);
+    const { chosenProducts, setChosenProducts, orderedProducts, setOrderedProducts } = useContext(AuthContext);
     const isChosen = chosenProducts.includes(product?.id);
     const orderedItem = orderedProducts.find((item) => item.product?.id === product.id);
     const isOrdered = !!orderedItem;
@@ -21,7 +22,7 @@ export function Product({ product }) {
                         {product?.isSale && <div className="product__label sale">Sale</div>}
                         {product?.isNew && <div className="product__label new">New</div>}
                     </div>
-                    <div onClick={() => changeChosenProducts(product?.id)}>
+                    <div onClick={() => changeChosenProducts(product?.id, setChosenProducts)}>
                         <Icon name={isChosen ? 'heart-red' : 'heart'} />
                     </div>
                 </div>
@@ -36,16 +37,25 @@ export function Product({ product }) {
             </div>
             {isOrdered ? (
                 <div className="product__quantity">
-                    <div className="product__count-button" onClick={() => changeOrderedProducts(product, 'decrease')}>
+                    <div
+                        className="product__count-button"
+                        onClick={() => changeOrderedProducts(product, 'decrease', setOrderedProducts)}
+                    >
                         -
                     </div>
                     <div className="count">{orderedCount}</div>
-                    <div className="product__count-button" onClick={() => changeOrderedProducts(product, 'increase')}>
+                    <div
+                        className="product__count-button"
+                        onClick={() => changeOrderedProducts(product, 'increase', setOrderedProducts)}
+                    >
                         +
                     </div>
                 </div>
             ) : (
-                <div className="product__add-button" onClick={() => changeOrderedProducts(product, 'increase')}>
+                <div
+                    className="product__add-button"
+                    onClick={() => changeOrderedProducts(product, 'increase', setOrderedProducts)}
+                >
                     Добавить
                 </div>
             )}

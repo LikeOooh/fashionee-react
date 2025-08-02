@@ -20,7 +20,7 @@ import data from '../../data/products.json';
  *     - max {number} - Максимальная цена среди продуктов
  *   - colors {string[]} - Уникальные цвета продуктов
  */
-export const filters = () => {
+export const getFilters = () => {
     const { products } = data;
     const productFilters = {
         categories: [],
@@ -92,4 +92,69 @@ export const filterProducts = (products, filtersApplied = {}) => {
     }
 
     return filteredProducts;
+};
+
+/**
+ * Переключает выбор товара в списке выбранных товаров.
+ * Удаляет productId, если он уже есть в списке, или добавляет, если отсутствует.
+ *
+ * @param {string|number} productId - ID товара для переключения
+ * @param {function} setChosenProducts - Функция-сеттер состояния (из useContext)
+ * @returns {void} Изменяет состояние напрямую
+ *
+ * @example
+ * // Использование в компоненте:
+ * const [chosenProducts, setChosenProducts] = useState([]);
+ * changeChosenProducts(123, setChosenProducts);
+ */
+export const changeChosenProducts = (productId, setChosenProducts) => {
+    setChosenProducts((chosenProducts) => {
+        const isProductSelected = chosenProducts.includes(productId);
+        return isProductSelected ? chosenProducts.filter((item) => item !== productId) : [...chosenProducts, productId];
+    });
+};
+
+/**
+ * Изменяет количество товара в списке заказанных товаров
+ * @param {Object} product - Объект товара (обязательные поля: id, price)
+ * @param {'increase'|'decrease'} action - Действие: увеличить/уменьшить количество
+ * @param {Function} setOrderedProducts - Функция-сеттер состояния заказанных товаров (из useContext)
+ * @returns {void} Обновляет состояние orderedProducts
+ * @example
+ * // Увеличение количества товара
+ * changeOrderedProducts(product, 'increase', setOrderedProducts);
+ */
+export const changeOrderedProducts = (product, action, setOrderedProducts) => {
+    if (!product || !product.id || typeof product.price !== 'number') {
+        console.error('Invalid product data');
+        return;
+    }
+    setOrderedProducts((orderedProducts) => {
+        const newOrderedProducts = [...orderedProducts];
+        const productIndex = orderedProducts.findIndex((p) => p.product?.id === product.id);
+        if (action === 'increase') {
+            if (productIndex >= 0) {
+                newOrderedProducts[productIndex] = {
+                    ...newOrderedProducts[productIndex],
+                    count: newOrderedProducts[productIndex].count + 1,
+                    totalPrice: product.price * (newOrderedProducts[productIndex].count + 1),
+                };
+            } else {
+                newOrderedProducts.push({ product: product, count: 1, totalPrice: product.price });
+            }
+        }
+        if (action === 'decrease' && productIndex >= 0) {
+            const updatedCount = newOrderedProducts[productIndex].count - 1;
+            if (updatedCount > 0) {
+                newOrderedProducts[productIndex] = {
+                    ...newOrderedProducts[productIndex],
+                    count: updatedCount,
+                    totalPrice: product.price * updatedCount,
+                };
+            } else {
+                newOrderedProducts.splice(productIndex, 1);
+            }
+        }
+        return newOrderedProducts;
+    });
 };

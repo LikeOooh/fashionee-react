@@ -9,6 +9,11 @@
   margin-bottom: 199px;
   padding-right: 120px;
 
+
+  @media (max-width: v.$tablet-portrait) {
+    margin-bottom: 40px;
+  }
+
   &__site-description {
     box-sizing: border-box;
     margin-top: 32px;
