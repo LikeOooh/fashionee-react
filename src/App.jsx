@@ -14,9 +14,11 @@ export function App() {
     return (
         <AuthProvider>
             <Header pageName={pageName} setPageName={setPageName} />
-            <ContentBlock pageName={pageName} setPageName={setPageName} />
-            {pageName === 'Shop' && <Showcase />}
-            {pageName === 'Cart' && <Cart />}
+            <main>
+                <ContentBlock pageName={pageName} setPageName={setPageName} />
+                {pageName === 'Shop' && <Showcase />}
+                {pageName === 'Cart' && <Cart />}
+            </main>
             <Footer />
         </AuthProvider>
     );

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '@/hooks/useDebounce.jsx';
 import { filterProducts, getFilters, sortProducts } from '@/helpers/products.js';
 import { Sort } from '@/components/shopPage/sort/Sort.jsx';
+import filtersImage from '@/assets/images/filters.png';
 import { Pagination } from '@/components/shopPage/pagination/Pagination.jsx';
 import './Showcase.scss';
 
@@ -22,6 +23,7 @@ export function Showcase() {
     const [selectedSort, setSelectedSort] = useState('RELEVANCE');
     const [currentPage, setCurrentPage] = useState(1);
     const productCount = productsToView?.length;
+    const [showAside, setShowAside] = useState(false);
 
     const slicedProducts = useMemo(() => {
         const start = (currentPage - 1) * productsPerPage;
@@ -49,6 +51,10 @@ export function Showcase() {
             : sorted;
     }, [selectedSort, debouncedSearchTerm, selectedCategory, prices, selectedColors]);
 
+    const handleShowAside = () => {
+        setShowAside(!showAside);
+    };
+
     //применение фильтров и поиск с учетом фильтрации и сортировки
     useEffect(() => {
         setProductsToView(filteredAndSortedProducts);
@@ -56,33 +62,39 @@ export function Showcase() {
     }, [filteredAndSortedProducts]);
 
     return (
-        <div className="container">
-            <div className="showcase">
-                <Sidebar
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    selectedCategory={selectedCategory}
-                    changeSelectedCategory={changeSelectedCategory}
-                    setPrices={setPrices}
-                    selectedColors={selectedColors}
-                    changeSelectedColors={changeSelectedColors}
-                />
-                <div className="showcase__products-wrapper">
-                    <Sort productCount={productCount} changeSortType={setSelectedSort} />
-                    <div className="showcase__products">
-                        {slicedProducts.length > 0 ? (
-                            slicedProducts.map((product) => <Product key={product?.id} product={product} />)
-                        ) : (
-                            <>No products found</>
-                        )}
-                    </div>
-                    <Pagination
-                        totalPages={totalPages}
-                        pages={pages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
+        <div className="showcase container">
+            <Sidebar
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                selectedCategory={selectedCategory}
+                changeSelectedCategory={changeSelectedCategory}
+                setPrices={setPrices}
+                selectedColors={selectedColors}
+                changeSelectedColors={changeSelectedColors}
+                showAside={showAside}
+                close={handleShowAside}
+            />
+            <div className="showcase__products-wrapper">
+                <div className="showcase__show-filters">
+                    <button className="showcase__show-filters-button" onClick={handleShowAside}>
+                        <img src={filtersImage} alt="Filters" />
+                        Filters
+                    </button>
                 </div>
+                <Sort productCount={productCount} changeSortType={setSelectedSort} />
+                <div className="showcase__products">
+                    {slicedProducts.length > 0 ? (
+                        slicedProducts.map((product) => <Product key={product?.id} product={product} />)
+                    ) : (
+                        <>No products found</>
+                    )}
+                </div>
+                <Pagination
+                    totalPages={totalPages}
+                    pages={pages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                />
             </div>
         </div>
     );

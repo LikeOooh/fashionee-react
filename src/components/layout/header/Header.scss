@@ -58,6 +58,8 @@
   }
 
   &__auth {
+    display: flex;
+
     @media (max-width: v.$tablet-portrait-large) {
       display: none;
     }

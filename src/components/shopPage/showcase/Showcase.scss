@@ -19,10 +19,7 @@
 
     @media (max-width: v.$tablet-landscape) {
       max-width: 564px;
-    }
-
-    @media (max-width: v.$mobile-large) {
-      align-items: center;
+      gap: 10px;
     }
   }
 
@@ -33,11 +30,37 @@
 
     @media (max-width: v.$tablet-portrait) {
       justify-content: space-evenly;
-      gap: 10px;
+      gap: 30px;
     }
 
     @media (max-width: v.$mobile-small) {
       display: block;
+      gap: 30px;
+    }
+  }
+
+  &__show-filters {
+    width: 100%;
+
+    @media (max-width: v.$mobile-small) {
+      width: 262px;
+    }
+  }
+
+  &__show-filters-button {
+    display: none;
+
+    @media (max-width: v.$mobile-large) {
+      display: flex;
+      padding: 10px;
+      justify-content: space-between;
+      align-items: center;
+      height: 34px;
+      width: 90px;
+
+      & img {
+        height: 20px;
+      }
     }
   }
 }

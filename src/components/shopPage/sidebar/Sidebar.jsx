@@ -5,6 +5,7 @@ import { Colors } from '@/components/shopPage/filters/colors/Colors.jsx';
 import { Search } from '@/components/shopPage/search/Search.jsx';
 import { ReviewedProduct } from '@/components/shopPage/reviewed-product/ReviewedProduct.jsx';
 import { useState } from 'react';
+import banner from '@/assets/images/sale.jpg';
 import './Sidebar.scss';
 
 export function Sidebar({
@@ -15,6 +16,8 @@ export function Sidebar({
     setPrices,
     selectedColors,
     changeSelectedColors,
+    showAside = false,
+    close,
 }) {
     const categories = ['All', ...getFilters().categories];
     const colors = [...getFilters().colors];
@@ -72,10 +75,16 @@ export function Sidebar({
         changeSelectedCategory(categorySelection);
         setPrices({ min: minPrice, max: maxPrice });
         changeSelectedColors(colorsSelection);
+        close();
     };
 
     return (
-        <div className="sidebar">
+        <div className={'sidebar' + (showAside ? ' aside' : '')}>
+            {showAside && (
+                <button onClick={close} className="sidebar__close-button">
+                    X
+                </button>
+            )}
             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Categories
                 categories={categories}
@@ -107,7 +116,7 @@ export function Sidebar({
             </div>
             <div>
                 <a href="#">
-                    <img src="@/assets/images/sale.jpg" alt="Season Sale Banner" />
+                    <img src={banner} alt="Season Sale Banner" />
                 </a>
             </div>
         </div>

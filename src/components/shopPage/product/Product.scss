@@ -13,6 +13,8 @@
 
   @media (max-width: v.$mobile-large) {
     max-width: 262px;
+    margin-bottom: 40px;
+    gap: 10px;
   }
 
   &__photo {
@@ -42,6 +44,10 @@
 
     @media (max-width: v.$tablet-portrait) {
       max-width: 160px;
+    }
+
+    @media (max-width: v.$mobile-large) {
+      max-width: 222px;
     }
   }
 

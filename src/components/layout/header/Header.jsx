@@ -5,10 +5,20 @@ import { Burger } from '@/components/ui/burger/Burger.jsx';
 import { AuthContext } from '@/context/AuthContext.jsx';
 import { useContext } from 'react';
 import './Header.scss';
+import { Notification } from '@/components/ui/notification/Notification.jsx';
+import { UseNotification } from '@/hooks/useNotification.jsx';
 
 export function Header({ pageName, setPageName }) {
     const { isAuth, setIsAuth, chosenProducts, orderedProducts } = useContext(AuthContext);
+    const { notification, showNotification } = UseNotification();
     const totalOrderedCount = orderedProducts.reduce((acc, item) => acc + item.count, 0);
+
+    const handleAuth = () => {
+        if (!isAuth) {
+            showNotification('Вы авторизованы');
+        }
+        setIsAuth(!isAuth);
+    };
 
     return (
         <header className="header">
@@ -29,10 +39,12 @@ export function Header({ pageName, setPageName }) {
                 </div>
             </div>
             <div className="header__right-side">
-                {isAuth && <span className="header__auth">Вы авторизованы</span>}
-                <button className="header__auth-button" onClick={() => setIsAuth(!isAuth)}>
-                    {isAuth ? 'Выйти' : 'Войти'}
-                </button>
+                <div className="header__auth">
+                    <Notification notification={notification} />
+                    <button className="header__auth-button" onClick={handleAuth}>
+                        {isAuth ? 'Выйти' : 'Войти'}
+                    </button>
+                </div>
                 <>
                     <Icon name="search" className="icon_search" />
                     <Icon name="user" className="icon_medium" />

@@ -5,7 +5,7 @@
   width: 100%;
 
   @media (max-width: v.$mobile-large) {
-    max-width: 200px;
+    max-width: 262px;
   }
 
   &-and-count {
@@ -19,7 +19,6 @@
 
     @media (max-width: v.$mobile-large) {
       justify-content: space-evenly;
-      width: 100%;
     }
 
     @media (max-width: v.$mobile-small) {

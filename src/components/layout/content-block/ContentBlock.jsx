@@ -5,7 +5,7 @@ export function ContentBlock({ pageName, setPageName }) {
     const pageNames = ['Cart', 'Shop'];
 
     return (
-        <div className="content-block">
+        <div className="content-block container">
             <div className="content-block__site-description">
                 <Icon name="vector-object-354" className="icon_vector-object-354" />
                 <div className="content-block__wrapper">
