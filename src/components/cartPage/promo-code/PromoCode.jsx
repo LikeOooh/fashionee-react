@@ -12,7 +12,7 @@ export function PromoCode() {
     const { notification, showNotification } = UseNotification();
 
     const changePromoCode = () => {
-        if (PROMO_CODES.includes(inputPromoCode.trim())) {
+        if (PROMO_CODES.includes(inputPromoCode.trim().toLowerCase())) {
             setPromoCode(inputPromoCode);
             setInputPromoCode('');
             showNotification('Промокод применен. Скидка - 10%!');
