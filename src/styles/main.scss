@@ -69,7 +69,7 @@ img {
     max-width: 640px;
   }
 
-  @media (max-width: v.$tablet-landscape) {
+  @media (max-width: v.$mobile-small) {
     max-width: 400px;
   }
 }
