@@ -64,6 +64,14 @@ img {
   @media (max-width: v.$tablet-landscape) {
     max-width: 840px;
   }
+
+  @media (max-width: v.$mobile-large) {
+    max-width: 640px;
+  }
+
+  @media (max-width: v.$tablet-landscape) {
+    max-width: 400px;
+  }
 }
 
 .input {

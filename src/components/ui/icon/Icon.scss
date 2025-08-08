@@ -36,6 +36,10 @@
     width: 354px;
     height: 322px;
     left: 60px;
+
+    @media (max-width: v.$mobile-large) {
+      right: 0;
+    }
   }
 
   &_vector-object-130 {

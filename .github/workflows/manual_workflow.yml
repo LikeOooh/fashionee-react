@@ -1,27 +1,23 @@
 name: Manual Workflow
 
 on:
-  workflow_dispatch:  # Позволяет запускать вручную
+  workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Используем последнюю Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Получить код из репозитория
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Шаг 2: Установить Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Укажите нужную версию Node.js
+          node-version: '20'
 
-      # Шаг 3: Установить зависимости (если есть package.json)
       - name: Install dependencies
         run: npm install
 
-      # Шаг 4: Запустить deploy-скрипт
       - name: Run deploy
-        run: npm run deploy  # Ваша команда
+        run: npm run deploy
